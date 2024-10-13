@@ -1,6 +1,5 @@
 name: Capstone Project FE
 
-# Run the workflow on push or pull request events
 on:
   push:
     branches:
@@ -23,13 +22,30 @@ jobs:
         with:
           node-version: '20'
 
-      # Install dependencies and build using npm
+      # Install dependencies
       - name: Install Dependencies
         run: npm install
 
+      # Build the project
       - name: Build the project
         run: npm run build
 
-      # Optionally, you can run tests
-      - name: Run tests
-        run: npm test  # Or 'yarn test' if applicable
+  check-merge-conflicts:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Check for merge conflicts
+        run: |
+          git fetch origin main
+          if git merge --no-commit --no-ff origin/main; then
+            echo "No merge conflicts."
+            git merge --abort  # Abort the merge if there are no conflicts
+          else
+            echo "Merge conflicts detected!"
+            exit 1  # Fail the job if there are merge conflicts
+          fi
