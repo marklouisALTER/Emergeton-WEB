@@ -1,0 +1,31 @@
+name: Capstone Project FE
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Setup Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Build the project
+      - name: Build the project
+        run: npm run build
