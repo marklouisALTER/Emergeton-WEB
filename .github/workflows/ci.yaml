@@ -42,10 +42,11 @@ jobs:
       - name: Check for merge conflicts
         run: |
           git fetch origin main
-          if git merge --no-commit --no-ff origin/main; then
+          if git merge --no-commit --no-ff --allow-unrelated-histories origin/main; then
             echo "No merge conflicts."
             git merge --abort  # Abort the merge if there are no conflicts
           else
             echo "Merge conflicts detected!"
             exit 1  # Fail the job if there are merge conflicts
           fi
+
