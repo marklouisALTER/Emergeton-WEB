@@ -1,19 +1,20 @@
-import React, { PropsWithChildren } from 'react'
-import UserSidebar from '../components/SIdebar/UserSidebar'
-import UserMobileNav from '../components/Navbar/UserMobileNav'
-import { UserDashboardNav } from '../components/Navbar/UserDashboardNav'
+import React from 'react'
+import Sidebar from '../components/SIdebar/Sidebar'
+import { DashboardNav } from '../components/Navbar/DashboardNav'
+import MobileNav from '../components/Navbar/MobileNav'
+import { Outlet } from 'react-router-dom'
 
-export const UserLayout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
+export const UserLayout: React.FC = () => {
   return (
     <section className=" dashboard-container ">
-      <UserSidebar />
+      <Sidebar />
       <div>
-        <UserDashboardNav />
-        <main className=" min-h-screen bg-gray-200 md:ml-[50px] md:p-4 lg:ml-[265px]">
-          {children}
+        <DashboardNav />
+        <main className=" min-h-screen bg-gray-200 md:ml-[50px] lg:ml-[265px]">
+          <Outlet />
         </main>
       </div>
-      <UserMobileNav />
+      <MobileNav />
     </section>
   )
 }
