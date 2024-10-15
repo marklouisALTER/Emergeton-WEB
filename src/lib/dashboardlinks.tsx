@@ -19,13 +19,13 @@ export type SidebarLink = {
     {
       key: 'dashboard',
       label: 'Dashboard',
-      path: '/user/dashboard',
+      path: '/dashboard',
       icon: <MdSpaceDashboard />
     },
     {
       key: 'profile',
       label: 'Profile',
-      path: '/user/profile',
+      path: '/profile',
       icon: <FaUserAlt />,
     },
     {
@@ -46,7 +46,7 @@ export type SidebarLink = {
     {
         key: 'profile',
         label: 'Profile',
-        path: '/dashboard/profile',
+        path: '/profile',
         icon: <FaUserAlt size={20} />,
     },
     {
