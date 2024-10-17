@@ -4,6 +4,14 @@ import 'leaflet/dist/leaflet.css';
 import { MdLocalPolice } from "react-icons/md";
 import { MdFireTruck } from "react-icons/md";
 import { MdHealthAndSafety } from "react-icons/md";
+import L from 'leaflet';
+
+const customIcon = L.divIcon({
+  className: 'custom-marker',
+  html: "<div style='background-color: red; width: 25px; height: 25px; border-radius: 50%; border: 2px solid white;'></div>",
+  iconSize: [10, 10],
+  popupAnchor: [0, -15],
+});
 
 const Dashboard:React.FC = () => {
   return (
@@ -21,6 +29,16 @@ const Dashboard:React.FC = () => {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <Marker position={[14.653740, 120.960177]}>
+              <Popup>
+                Kulang 20 sa pag dedesign. <br /> dagdag ka pag gusto mo maganda.
+              </Popup>
+            </Marker>
+            <Marker position={[14.653750, 120.960332]} icon={customIcon}>
+              <Popup>
+                Kulang 20 sa pag dedesign. <br /> dagdag ka pag gusto mo maganda.
+              </Popup>
+            </Marker>
+            <Marker position={[14.653798, 120.959953]} icon={customIcon}>
               <Popup>
                 Kulang 20 sa pag dedesign. <br /> dagdag ka pag gusto mo maganda.
               </Popup>
