@@ -3,8 +3,15 @@ import { FaPhoneVolume } from "react-icons/fa6";
 import { PiUserCircleFill } from "react-icons/pi";
 import { IoIosLock } from "react-icons/io";
 import longosCityHall from '../assets/longos-city-hall.jpg'
+import { useNavigate } from 'react-router-dom';
 
 const AdminLogin:React.FC = () => {
+  const navigate = useNavigate()
+
+  const handleSubmit = () => {
+    navigate('/dashboard');
+  }
+
   return (
     <section className='relative w-full flex items-center justify-center h-screen px-5 bg-[#e8e8e8]'>
     <div className='w-[40rem] z-[99]'>
@@ -47,7 +54,7 @@ const AdminLogin:React.FC = () => {
                 </div>
                 <p className='font-secondary text-sm text-primary'>Forgot Password?</p>
               </div>
-              <button className='bg-primary text-white py-2 rounded-full mt-5'>Login</button>
+              <button className='bg-primary text-white py-2 rounded-full mt-5' onClick={handleSubmit}>Login</button>
             </div>
           </form>
         </div>
