@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import Highlighter from 'react-highlight-words';
-import { Button, ConfigProvider, Input, Space, Table } from 'antd';
+import { Button, ConfigProvider, Input, Space, Table, Popconfirm, message } from 'antd';
 import type { InputRef, TableColumnsType, TableColumnType } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import type { FilterDropdownProps } from 'antd/es/table/interface';
@@ -156,6 +156,27 @@ export const DepartmentTable:React.FC = () => {
         dataIndex: 'date_created',
         key: 'date_created',
     },
+    {
+        title: 'Action',
+        key: 'action',
+        width: 150,
+        fixed: 'right',
+        align: 'center',
+        render: () => (
+            <Space size={5}>
+                <Button type="primary" size='small'>Edit</Button>
+                <Popconfirm
+                    title="Delete the task"
+                    description="Are you sure to delete this task?"
+                    onConfirm={() => message.success('Deleted')}
+                    okText="Yes"
+                    cancelText="No"
+                >
+                    <Button type="primary" danger size='small'>Delete</Button>
+                </Popconfirm>
+            </Space>
+        )
+    }
 ];
 
 
@@ -170,7 +191,7 @@ export const DepartmentTable:React.FC = () => {
     }}
   >
     <Table 
-      scroll={{ x: 768 }}
+      scroll={{ x: 1200 }}
       columns={columns} 
       dataSource={data}
       rowHoverable={true}
