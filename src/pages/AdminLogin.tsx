@@ -20,7 +20,7 @@ const AdminLogin:React.FC = () => {
             <div className='w-full flex flex-col gap-5'>
               <div className='relative w-full flex items-center bg-[#e8e8e8] rounded-full'>
                 <div className='px-4 rounded-l-full'>
-                  <PiUserCircleFill className='text-brand-primary text-3xl'/>
+                  <PiUserCircleFill className='text-primary text-3xl'/>
                 </div>
                 <input 
                   type='text' 
@@ -31,7 +31,7 @@ const AdminLogin:React.FC = () => {
               </div>
               <div className='relative w-full flex items-center bg-[#e8e8e8] rounded-full'>
                 <div className='px-4 rounded-l-full'>
-                  <IoIosLock className='text-brand-primary text-3xl'/>
+                  <IoIosLock className='text-primary text-3xl'/>
                 </div>
                 <input 
                   type='password' 
@@ -45,14 +45,14 @@ const AdminLogin:React.FC = () => {
                   <input type='checkbox' id='rememberMe' name='rememberMe' className='mr-2' />
                   <label htmlFor='rememberMe' className='font-secondary text-sm text-gray-500 cursor-pointer'>Remember me</label>
                 </div>
-                <p className='font-secondary text-sm text-brand-primary'>Forgot Password?</p>
+                <p className='font-secondary text-sm text-primary'>Forgot Password?</p>
               </div>
-              <button className='bg-brand-primary text-white py-2 rounded-full mt-5'>Login</button>
+              <button className='bg-primary text-white py-2 rounded-full mt-5'>Login</button>
             </div>
           </form>
         </div>
     </div>
-    <div className='absolute w-full h-[20rem] bg-brand-primary bottom-0'></div>
+    <div className='absolute w-full h-[20rem] bg-primary bottom-0'></div>
     <img 
       src={longosCityHall} 
       alt="city hall" 
