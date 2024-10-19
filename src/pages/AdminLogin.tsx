@@ -9,7 +9,7 @@ const AdminLogin:React.FC = () => {
   const navigate = useNavigate()
 
   const handleSubmit = () => {
-    navigate('/dashboard');
+    navigate('/admin/dashboard');
   }
 
   return (

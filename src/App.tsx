@@ -7,6 +7,8 @@ import { Login } from './pages/Login'
 import AdminLogin from './pages/AdminLogin'
 import { UserLayout } from './layout/UserLayout'
 import Dashboard from './pages/admin/Dashboard'
+import Profile from './pages/admin/Profile'
+import { Department } from './pages/admin/Department'
 function App() {
   
   return (
@@ -16,8 +18,10 @@ function App() {
           {/* <Route index element={<Homepage />} /> */}
           {/* <Route path="register" element={<Register />} /> */}
         {/* </Route> */}
-        <Route path='dashboard' element={<UserLayout />} >
-          <Route index element={<Dashboard />} />
+        <Route path='admin' element={<UserLayout />} >
+          <Route path='dashboard' element={<Dashboard />} />
+          <Route path='profile' element={<Profile />} />
+          <Route path='department' element={<Department />} />
         </Route>
         <Route path='login' element={<Login />} />
         <Route path='/' element={<AdminLogin />} />
