@@ -4,6 +4,8 @@ import type { TabsProps } from 'antd';
 import { FiUser } from "react-icons/fi";
 import { FaUserLock } from "react-icons/fa6";
 import useResponsiveLayout from '@/lib/useResponsiveLayout';
+import PersonalInformation from '@/components/Account-Settings/PersonalInformation';
+import { ChangePassword } from '@/components/Account-Settings/ChangePassword';
 
 const Profile:React.FC = () => {
 
@@ -12,12 +14,12 @@ const Profile:React.FC = () => {
   const items: TabsProps['items'] = [{
     key: '1',
     label: <p className='font-sans flex items-center gap-2 text-sm'><FiUser />Personal Information</p>,
-    children: 'Personal Information'
+    children: <PersonalInformation />
   },
   {
     key: '2',
     label: <p className='font-sans flex items-center gap-2 text-sm'><FaUserLock />Change Password</p>,
-    children: 'Change Password'
+    children: <ChangePassword />
   },
 ]
 
