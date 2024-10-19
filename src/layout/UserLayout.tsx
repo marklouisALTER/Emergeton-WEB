@@ -10,7 +10,7 @@ export const UserLayout: React.FC = () => {
       <Sidebar />
       <div>
         <DashboardNav />
-        <main className=" min-h-screen bg-gray-200 md:ml-[50px] lg:ml-[265px]">
+        <main className=" min-h-screen bg-gray-200 sm:ml-[50px] lg:ml-[265px]">
           <Outlet />
         </main>
       </div>
