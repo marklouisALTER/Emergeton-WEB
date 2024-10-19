@@ -44,24 +44,9 @@ const Dashboard:React.FC = () => {
               </Popup>
             </Marker>
           </MapContainer>
-          <div className='mt-5'>
-            <div className='relative w-full rounded-md bg-white shadow-md p-3'>
-              <h3 className='font-secondary text-red-500 font-medium animate-pulse'>Emergency</h3>
-              <p className='font-secondary text-gray-400 text-xs mt-2'>Name: <span className='text-black/70'>Markme Dev</span></p>
-              {/* <p className='font-secondary text-gray-400 text-xs'>Location: <span className='text-black/70'>City of malabon university</span></p>
-              <p className='font-secondary text-gray-400 text-xs'>Remarks: <span className='text-black/70'>Send help</span></p> */}
-              <div className='mt-2 w-full flex justify-end'>
-                <button className='bg-green-500 text-white text-xs px-3 p-1 rounded-sm'>
-                  Deploy
-                </button>
-              </div>
-              <div className='absolute top-5 right-3'>
-                <p className='font-secondary text-black/80 text-xs'>2 mins ago</p>
-              </div>
-            </div>
-          </div>
+         
         </div>
-        <div className='w-full rounded-md p-5 shadow-md h-full border-2 border-gray-300'>
+        <div className='w-full h-full'>
           <h3 className='font-secondary text-black/80 font-medium'>Unit Available</h3>
           <div className='mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'>
             <div className='rounded-md w-full bg-primary mt-5 p-5 relative'>
@@ -98,15 +83,22 @@ const Dashboard:React.FC = () => {
               </div>
             </div>
           </div>
-          <div className='w-full mt-5'>
-              <div className='w-full bg-primary h-[15rem] rounded-md'>
+          <h2 className='font-secondary text-black/80 font-medium mt-5'>Recent Emergency</h2>
+          <div className='mt-5'>
+            <div className='relative w-full rounded-md bg-white shadow-md p-3 cursor-pointer transition-all ease-in-out hover:scale-[1.01]'>
+              <h3 className='font-secondary text-red-500 font-medium animate-pulse'>Emergency</h3>
+              <p className='font-secondary text-gray-400 text-xs mt-2'>Name: <span className='text-black/70'>Markme Dev</span></p>
+              {/* <p className='font-secondary text-gray-400 text-xs'>Location: <span className='text-black/70'>City of malabon university</span></p>
+              <p className='font-secondary text-gray-400 text-xs'>Remarks: <span className='text-black/70'>Send help</span></p> */}
+              <div className='mt-2 w-full flex justify-end'>
+                <button className='bg-green-600 text-white text-xs px-3 p-1 rounded-sm font-secondary hover:bg-green-600/80'>
+                  Deploy
+                </button>
               </div>
-              <div className='grid grid-cols-2 gap-5 mt-5'>
-                <div className='w-full bg-primary h-[10rem] rounded-md'>
-                </div>
-                <div className='w-full bg-primary h-[10rem] rounded-md'>
-                </div>
+              <div className='absolute top-5 right-3'>
+                <p className='font-secondary text-black/80 text-xs'>2 mins ago</p>
               </div>
+            </div>
           </div>
         </div>
       </div>
