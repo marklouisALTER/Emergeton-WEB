@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Tabs,ConfigProvider } from 'antd';
 import type { TabsProps } from 'antd';
 import { FiUser } from "react-icons/fi";
@@ -6,11 +6,25 @@ import { FaUserLock } from "react-icons/fa6";
 import useResponsiveLayout from '@/lib/useResponsiveLayout';
 import PersonalInformation from '@/components/Account-Settings/PersonalInformation';
 import { ChangePassword } from '@/components/Account-Settings/ChangePassword';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Authentication } from '@/Authentication/Authenticate';
 
 const Profile:React.FC = () => {
 
     const isMobile = useResponsiveLayout();
-
+    const { getUser, getID, getToken, isAuthenticated } = Authentication();
+    const user = getUser();
+    const  token = getToken()
+    const userID = getID()
+    const navigate = useNavigate();
+    const location = useLocation();
+  
+    useEffect(() => {
+      if(!isAuthenticated()){
+          navigate('/', { state: { message: "You must login first", from: location.pathname } })
+      }      
+      
+    },[user, token, userID])
   const items: TabsProps['items'] = [{
     key: '1',
     label: <p className='font-sans flex items-center gap-2 text-sm'><FiUser />Personal Information</p>,

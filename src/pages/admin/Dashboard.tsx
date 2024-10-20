@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
 import { MdLocalPolice } from "react-icons/md";
 import { MdFireTruck } from "react-icons/md";
 import { MdHealthAndSafety } from "react-icons/md";
 import L from 'leaflet';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Authentication } from '@/Authentication/Authenticate';
 
 const customIcon = L.divIcon({
   className: 'custom-marker',
@@ -14,6 +16,22 @@ const customIcon = L.divIcon({
 });
 
 const Dashboard:React.FC = () => {
+
+  
+const { getUser, getID, getToken, isAuthenticated } = Authentication();
+const user = getUser();
+const  token = getToken()
+const userID = getID()
+const navigate = useNavigate();
+const location = useLocation();
+
+useEffect(() => {
+  if(!isAuthenticated()){
+      navigate('/', { state: { message: "You must login first", from: location.pathname } })
+  }      
+  
+},[user, token, userID])
+
   return (
     <section className='p-5 md:pl-5'>
       <h1 className='font-primary text-black/80 text-xl font-semibold'>Admin Dashboard</h1>
