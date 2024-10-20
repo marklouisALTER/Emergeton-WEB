@@ -8,6 +8,8 @@ import { toast, Toaster } from 'sonner';
 import axios, { AxiosError } from 'axios';
 import { useLoadingStore } from '@/store/useLoading';
 import { Button } from 'antd';
+import { Authentication } from '@/Authentication/Authenticate';
+
 const AdminLogin:React.FC = () => {
 
   const navigate = useNavigate()
@@ -16,6 +18,7 @@ const AdminLogin:React.FC = () => {
     password: ''
   })
   const {isLoading, setLoading} = useLoadingStore();
+  const { login } = Authentication();
 
   const handleSubmit = async () => {
     setLoading(true)
@@ -31,8 +34,11 @@ const AdminLogin:React.FC = () => {
       })
 
       if(request.status === 200) {
-        // localStorage.setItem('token', request.data.token)
-        
+        const token = request.data.data.token
+        const user = `${request.data.data.user.first_name} ${request.data.data.user.last_name}`
+        const id = request.data.data.user.id
+
+        login(user, token, id)
         setLoading(false)
         navigate('/admin/dashboard')
       }
