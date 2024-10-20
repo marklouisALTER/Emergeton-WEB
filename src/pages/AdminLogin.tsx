@@ -3,7 +3,7 @@ import { FaPhoneVolume } from "react-icons/fa6";
 import { PiUserCircleFill } from "react-icons/pi";
 import { IoIosLock } from "react-icons/io";
 import longosCityHall from '../assets/longos-city-hall.jpg'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast, Toaster } from 'sonner';
 import axios, { AxiosError } from 'axios';
 import { useLoadingStore } from '@/store/useLoading';
@@ -19,6 +19,12 @@ const AdminLogin:React.FC = () => {
   })
   const {isLoading, setLoading} = useLoadingStore();
   const { login } = Authentication();
+  const location = useLocation();
+  const from = location.state?.from || '/admin/dashboard';
+
+  // useEffect(() => {
+  //   location.state?.message && toast.error(location.state.message)
+  // },[])
 
   const handleSubmit = async () => {
     setLoading(true)
@@ -40,7 +46,8 @@ const AdminLogin:React.FC = () => {
 
         login(user, token, id)
         setLoading(false)
-        navigate('/admin/dashboard')
+        // navigate('/admin/dashboard')
+        navigate(from, {replace: true})
       }
 
     }catch(error) {
@@ -51,10 +58,12 @@ const AdminLogin:React.FC = () => {
     }
 
   }
+  
 
   return (
     <section className='relative w-full flex items-center justify-center h-screen px-5 bg-[#e8e8e8]'>
       <Toaster richColors position="top-center"/>
+      
     <div className='w-[40rem] z-[99]'>
         <div className='flex flex-col items-center mb-10'>
           <div className='p-5 rounded-full border-4 border-black/80'>
@@ -63,6 +72,9 @@ const AdminLogin:React.FC = () => {
           <h1 className='text-3xl font-extrabold mt-5 text-black/80 font-primary leading-4 tracking-widest'>EMERGTON</h1>
           <p className='text-lg text-black/60 mt-2 font-medium font-secondary'>EMERGENCY APP</p>
         </div>
+        {location.state?.message &&
+            <h3 className='font-secondary text-xl md:text-xl font-bold text-center text-red-500'>{location.state.message}</h3>
+        }
         <div className='place-items-center mt-5 w-[90%] md:w-[80%] shadow-lg p-10 mx-auto bg-white rounded-3xl'>
             <div className='w-full flex flex-col gap-5'>
               <div className='relative w-full flex items-center bg-[#e8e8e8] rounded-full'>
