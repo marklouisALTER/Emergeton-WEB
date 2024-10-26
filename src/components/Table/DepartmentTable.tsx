@@ -4,7 +4,8 @@ import { Button, ConfigProvider, Input, Space, Table, Popconfirm, message } from
 import type { InputRef, TableColumnsType, TableColumnType } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import type { FilterDropdownProps } from 'antd/es/table/interface';
-import { useDepartmentTable } from '@/store/useDepartmentTable';
+import { useDepartmentTable } from '@/store/Department/useDepartmentTable';
+import { Authentication } from '@/Authentication/Authenticate';
 
 type DepartmentTableType = {
     id: number;
@@ -14,7 +15,7 @@ type DepartmentTableType = {
     address: string;
     status: string;
     tags:  string;
-    date_created: string;
+    created_at?: string;
 }
 
 type DataIndex = keyof DepartmentTableType;
@@ -24,8 +25,15 @@ export const DepartmentTable:React.FC = () => {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef<InputRef>(null);
-    const { data } = useDepartmentTable();
-    
+    const { data, isLoading, deleteData } = useDepartmentTable();
+    const { getToken } = Authentication();
+    const token = getToken();
+
+    const removeRecord = (id: number) => {
+        deleteData(id, token);
+        return message.success('Record deleted successfully');
+    }
+
   const handleSearch = (
     selectedKeys: string[],
     confirm: FilterDropdownProps['confirm'],
@@ -140,6 +148,7 @@ export const DepartmentTable:React.FC = () => {
         title: 'Address',
         dataIndex: 'address',
         key: 'address',
+        width: 300,
     },
     {
         title: 'Status',
@@ -153,8 +162,8 @@ export const DepartmentTable:React.FC = () => {
     },
     {
         title: 'Date Created',
-        dataIndex: 'date_created',
-        key: 'date_created',
+        dataIndex: 'created_at',
+        key: 'created_at',
     },
     {
         title: 'Action',
@@ -162,17 +171,17 @@ export const DepartmentTable:React.FC = () => {
         width: 150,
         fixed: 'right',
         align: 'center',
-        render: () => (
+        render: (record) => (
             <Space size={5}>
                 <Button type="primary" size='small'>Edit</Button>
                 <Popconfirm
                     title="Delete the task"
                     description="Are you sure to delete this task?"
-                    onConfirm={() => message.success('Deleted')}
+                    onConfirm={() => removeRecord(record.id)}
                     okText="Yes"
                     cancelText="No"
                 >
-                    <Button type="primary" danger size='small'>Delete</Button>
+                    <Button type="primary" danger size='small' loading={isLoading}>Delete</Button>
                 </Popconfirm>
             </Space>
         )
@@ -193,6 +202,8 @@ export const DepartmentTable:React.FC = () => {
     <Table 
       scroll={{ x: 1200 }}
       columns={columns} 
+      loading={isLoading}
+      pagination={{pageSize: 5}}
       dataSource={data}
       rowHoverable={true}
     />

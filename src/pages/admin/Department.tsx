@@ -1,11 +1,14 @@
 import { Authentication } from '@/Authentication/Authenticate';
 import { DepartmentModal } from '@/components/Modal/DepartmentModal'
 import { DepartmentTable } from '@/components/Table/DepartmentTable'
+import { useDepartmentTable } from '@/store/Department/useDepartmentTable';
 import React, { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
-
+import { toast, Toaster } from 'sonner';
 export const Department:React.FC = () => {
+  
   const { getUser, getID, getToken, isAuthenticated } = Authentication();
+  const { fetchData, response, error } = useDepartmentTable();
   const user = getUser();
   const  token = getToken()
   const userID = getID()
@@ -16,11 +19,23 @@ export const Department:React.FC = () => {
     if(!isAuthenticated()){
         navigate('/', { state: { message: "You must login first", from: location.pathname } })
     }      
-    
-  },[user, token, userID])
 
+    fetchData(token)
+
+    if(error) {
+      toast.error(response.message)
+    }
+
+    // if(response.message) {
+    //   toast.success(response.message)
+    // }
+
+    console.log(token)
+  },[user, token, userID, error])
+console.log(response.message)
   return (
     <section className='p-5 md:pl-5'>
+      <Toaster richColors position="top-center"/>
       <div className='flex items-center justify-end py-5'>
         <DepartmentModal />
       </div>
