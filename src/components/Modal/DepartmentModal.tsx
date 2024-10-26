@@ -32,7 +32,8 @@ import {
 } from "@/components/ui/select"
 
 import { AiFillFileAdd } from "react-icons/ai";
-
+import { useDepartmentTable } from '@/store/Department/useDepartmentTable';
+import { Authentication } from '@/Authentication/Authenticate';
 
 const FormSchema = z.object({
     name: z.string({
@@ -50,13 +51,14 @@ const FormSchema = z.object({
     status: z.string({
         message: "Status is required",
     }).min(3).max(20),
-    tags: z.string({
-        message: "Tags is required",
-    }).min(3).max(50)
+    tags: z.string().nonempty({ message: "Tags is required" }),
   })
 
 export const DepartmentModal:React.FC = () => {
 
+    const { addData, isLoading } = useDepartmentTable();
+    const { getToken } = Authentication();
+    const token = getToken();
     const DepartmentForm = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -64,13 +66,13 @@ export const DepartmentModal:React.FC = () => {
             email: "",
             contact_number: "",
             address: "",
-            status: "Active",
+            status: "Available",
             tags: ""
         }
     })
 
     function onSubmit(data: z.infer<typeof FormSchema>) {
-        console.log(data)
+        addData(data, token);
     }
     
 
@@ -159,7 +161,7 @@ export const DepartmentModal:React.FC = () => {
                 />
                 </div>
                 <div className='flex items-center mt-5 gap-5'>
-                <FormField
+                {/* <FormField
                     control={DepartmentForm.control}
                     name="status"
                     render={({ field }) => (
@@ -175,7 +177,7 @@ export const DepartmentModal:React.FC = () => {
                         <FormMessage />
                     </FormItem>
                     )}
-                />
+                /> */}
                 <FormField
                   control={DepartmentForm.control}
                   name="tags"
@@ -183,13 +185,14 @@ export const DepartmentModal:React.FC = () => {
                     <FormItem className="flex flex-col w-full">
                       <FormLabel className="font-sans font-semibold mt-2">Tags</FormLabel>
                         <Select
+                          onValueChange={field.onChange} // Ensures the value is set in the form state
                           value={field.value}
-                          onValueChange={field.onChange}
                         >
                           <SelectTrigger>
                             <SelectValue>{field.value || "Select Tags"}</SelectValue>
                           </SelectTrigger>
                           <SelectContent>
+                            {/* <SelectItem value="Select">Select</SelectItem> */}
                             <SelectItem value="Police">Police</SelectItem>
                             <SelectItem value="Fire">Fire</SelectItem>
                             <SelectItem value="Health">Health</SelectItem>
@@ -202,7 +205,9 @@ export const DepartmentModal:React.FC = () => {
                 </div>
               <DialogFooter>
                 <Button className='font-sans bg-primary px-5 py-2 rounded-md text-white hover:bg-primary/80
-                  transition-all delay-75 ease-in-out flex items-center gap-2' type="submit">
+                  transition-all delay-75 ease-in-out flex items-center gap-2' type="submit"
+                  disabled={isLoading}
+                  >
                     Submit
                 </Button>
               </DialogFooter>
