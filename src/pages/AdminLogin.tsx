@@ -34,18 +34,19 @@ const AdminLogin:React.FC = () => {
     }
 
     try{
-      const request = await axios.post('http://localhost:8000/api/v1/auth/login', {
+      const request = await axios.post('https://emergeton-api.onrender.com/api/v1/auth/login', {
         email: formData.email,
         password: formData.password
       })
 
       if(request.status === 200) {
-        const token = request.data.data.token
-        const user = `${request.data.data.user.first_name} ${request.data.data.user.last_name}`
-        const id = request.data.data.user.id
 
-        login(user, token, id)
+        // console.log('tangina mo pasok kaan')
+        const token = request.data.data.token
+        const user = `${request.data.data.first_name} ${request.data.data.last_name}`
+        const id = request.data.data.id
         setLoading(false)
+        login(user, token, id)
         // navigate('/admin/dashboard')
         navigate(from, {replace: true})
       }

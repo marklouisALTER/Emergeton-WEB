@@ -25,14 +25,7 @@ export const Department:React.FC = () => {
     if(error) {
       toast.error(response.message)
     }
-
-    // if(response.message) {
-    //   toast.success(response.message)
-    // }
-
-    console.log(token)
   },[user, token, userID, error])
-console.log(response.message)
   return (
     <section className='p-5 md:pl-5'>
       <Toaster richColors position="top-center"/>

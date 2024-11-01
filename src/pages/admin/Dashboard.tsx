@@ -7,6 +7,8 @@ import { MdHealthAndSafety } from "react-icons/md";
 import L from 'leaflet';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Authentication } from '@/Authentication/Authenticate';
+import { useAlertStore } from '@/store/Alerts/useStoreAlerts';
+import AlertCard from '@/components/Cards/AlertCard';
 
 const customIcon = L.divIcon({
   className: 'custom-marker',
@@ -24,15 +26,23 @@ const  token = getToken()
 const userID = getID()
 const navigate = useNavigate();
 const location = useLocation();
+const { fetchAlert, alertData } = useAlertStore();
 
 useEffect(() => {
   if(!isAuthenticated()){
       navigate('/', { state: { message: "You must login first", from: location.pathname } })
   }      
   
+  fetchAlert(token)
+  
 },[user, token, userID])
 
+// alertData.map((data) => {
+//   console.log(data.latitude)
+// })
+
   return (
+
     <section className='p-5 md:pl-5'>
       <h1 className='font-primary text-black/80 text-xl font-semibold'>Admin Dashboard</h1>
       <div className='grid grid-cols-1 sm:grid-cols-2 h-screen gap-5 py-5'>  
@@ -46,21 +56,22 @@ useEffect(() => {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={[14.653740, 120.960177]}>
-              <Popup>
-                Kulang 20 sa pag dedesign. <br /> dagdag ka pag gusto mo maganda.
-              </Popup>
-            </Marker>
-            <Marker position={[14.653750, 120.960332]} icon={customIcon}>
-              <Popup>
-                Kulang 20 sa pag dedesign. <br /> dagdag ka pag gusto mo maganda.
-              </Popup>
-            </Marker>
-            <Marker position={[14.653798, 120.959953]} icon={customIcon}>
-              <Popup>
-                Kulang 20 sa pag dedesign. <br /> dagdag ka pag gusto mo maganda.
-              </Popup>
-            </Marker>
+            {
+              alertData.map((data) => {
+                return (
+                  <Marker position={[data.latitude, data.longitude]} icon={customIcon}>
+                    <Popup>
+                      <div>
+                        <h3 className='font-secondary text-black/80 font-medium'>Emergency</h3>
+                        <p className='font-secondary text-gray-400 text-xs'>Name: <span className='text-black/70'>{data.message}</span></p>
+                        <p className='font-secondary text-gray-400 text-xs'>Location: <span className='text-black/70'>City of malabon university</span></p>
+                        <p className='font-secondary text-gray-400 text-xs'>Remarks: <span className='text-black/70'>Send help</span></p>
+                      </div>
+                    </Popup>
+                  </Marker>
+               )
+              })
+            } 
           </MapContainer>
          
         </div>
@@ -101,23 +112,14 @@ useEffect(() => {
               </div>
             </div>
           </div>
-          <h2 className='font-secondary text-black/80 font-medium mt-5'>Recent Emergency</h2>
-          <div className='mt-5'>
-            <div className='relative w-full rounded-md bg-white shadow-md p-3 cursor-pointer transition-all ease-in-out hover:scale-[1.01]'>
-              <h3 className='font-secondary text-red-500 font-medium animate-pulse'>Emergency</h3>
-              <p className='font-secondary text-gray-400 text-xs mt-2'>Name: <span className='text-black/70'>Markme Dev</span></p>
-              {/* <p className='font-secondary text-gray-400 text-xs'>Location: <span className='text-black/70'>City of malabon university</span></p>
-              <p className='font-secondary text-gray-400 text-xs'>Remarks: <span className='text-black/70'>Send help</span></p> */}
-              <div className='mt-2 w-full flex justify-end'>
-                <button className='bg-green-600 text-white text-xs px-3 p-1 rounded-sm font-secondary hover:bg-green-600/80'>
-                  Deploy
-                </button>
-              </div>
-              <div className='absolute top-5 right-3'>
-                <p className='font-secondary text-black/80 text-xs'>2 mins ago</p>
-              </div>
+          <h2 className='font-secondary text-white bg-primary font-medium mt-5 p-4'>Recent Emergency</h2>
+            <div className='flex flex-col gap-5 h-96 overflow-y-auto'>
+              {
+                alertData.map((data, index) => (
+                  <AlertCard key={index} {...data} />
+                ))
+              }
             </div>
-          </div>
         </div>
       </div>
     </section>
