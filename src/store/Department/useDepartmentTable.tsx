@@ -43,7 +43,7 @@ export const useDepartmentTable = create<departmentTableProps>((set) => ({
     fetchData: async (token) => {
         set({ isLoading: true });
         try{
-            const response = await axios.get('http://localhost:8000/api/v1/departments', {
+            const response = await axios.get('https://emergeton-api.onrender.com/api/v1/departments', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -67,7 +67,7 @@ export const useDepartmentTable = create<departmentTableProps>((set) => ({
     deleteData: async (id, token) => {
         set({ isLoading: true });
         try{
-            await axios.delete(`http://localhost:8000/api/v1/departments/delete/${id}`, {
+            await axios.delete(`https://emergeton-api.onrender.com/api/v1/departments/delete/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -104,7 +104,7 @@ export const useDepartmentTable = create<departmentTableProps>((set) => ({
         }
 
         try{
-            const response = await axios.post('http://localhost:8000/api/v1/departments/create', departmentData, {
+            const response = await axios.post('https://emergeton-api.onrender.com/api/v1/departments/create', departmentData, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

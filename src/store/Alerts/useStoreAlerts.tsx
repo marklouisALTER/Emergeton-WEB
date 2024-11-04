@@ -5,10 +5,13 @@ type alertDataType = {
     message: string;
     alertType: string;
     date: string;
-    alertID: string;
+    id: string;
     residentID: string;
     latitude: number;
     longitude: number;
+    address: string;
+    first_name: string;
+    last_name: string;
 }
 
 type alertStoreType = {

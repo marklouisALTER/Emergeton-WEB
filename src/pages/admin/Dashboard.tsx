@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Authentication } from '@/Authentication/Authenticate';
 import { useAlertStore } from '@/store/Alerts/useStoreAlerts';
 import AlertCard from '@/components/Cards/AlertCard';
+import { ConfirmationModal } from '@/components/Modal/ConfirmationModal';
 
 const customIcon = L.divIcon({
   className: 'custom-marker',
@@ -38,7 +39,7 @@ useEffect(() => {
 },[user, token, userID])
 
 // alertData.map((data) => {
-//   console.log(data.latitude)
+//   console.log(data.alertID)
 // })
 
   return (
@@ -64,8 +65,8 @@ useEffect(() => {
                       <div>
                         <h3 className='font-secondary text-black/80 font-medium'>Emergency</h3>
                         <p className='font-secondary text-gray-400 text-xs'>Name: <span className='text-black/70'>{data.message}</span></p>
-                        <p className='font-secondary text-gray-400 text-xs'>Location: <span className='text-black/70'>City of malabon university</span></p>
-                        <p className='font-secondary text-gray-400 text-xs'>Remarks: <span className='text-black/70'>Send help</span></p>
+                        <p className='font-secondary text-gray-400 text-xs'>Location: <span className='text-black/70'>{data.address}</span></p>
+                        <p className='font-secondary text-gray-400 text-xs'>Remarks: <span className='text-black/70'>{data.alertType}</span></p>
                       </div>
                     </Popup>
                   </Marker>
@@ -113,7 +114,7 @@ useEffect(() => {
             </div>
           </div>
           <h2 className='font-secondary text-white bg-primary font-medium mt-5 p-4'>Recent Emergency</h2>
-            <div className='flex flex-col gap-5 h-96 overflow-y-auto'>
+            <div className='flex flex-col gap-5 h-96 overflow-y-auto overflow-x-hidden'>
               {
                 alertData.map((data, index) => (
                   <AlertCard key={index} {...data} />
@@ -122,6 +123,7 @@ useEffect(() => {
             </div>
         </div>
       </div>
+      <ConfirmationModal / >
     </section>
   )
 }
