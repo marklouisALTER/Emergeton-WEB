@@ -15,6 +15,7 @@ type departmentType = {
 type departmentTableProps = {
     data: departmentType[];
     error: boolean;
+    success: boolean;
     response: {
         title: string;
         message: string;
@@ -35,6 +36,7 @@ type departmentTableProps = {
 export const useDepartmentTable = create<departmentTableProps>((set) => ({
     data: [],
     error: false,
+    success: false,
     response: {
         title: '',
         message: ''
@@ -75,7 +77,9 @@ export const useDepartmentTable = create<departmentTableProps>((set) => ({
             // for soft delete if there is.
             set((state) => ({
                 isLoading: false,
-                data: state.data?.filter((item) => item.id !== id)
+                data: state.data?.filter((item) => item.id !== id),
+                success: true,
+                response: { title: 'Success', message: 'Record deleted successfully' }
             }))
             // set({ isLoading: false, data });
 
@@ -111,7 +115,7 @@ export const useDepartmentTable = create<departmentTableProps>((set) => ({
             })
             const newData = response.data.data;
 
-            set({ isLoading: false });
+            set({ isLoading: false, success: true, response: { title: 'Success', message: 'Record added successfully' } });
             set((state) => ({
                 data: [...state.data || [], newData]
             }))
@@ -123,7 +127,7 @@ export const useDepartmentTable = create<departmentTableProps>((set) => ({
                     error: true, 
                     response: { 
                         title: error.response?.data?.title || 'Error',
-                        message: error.response?.data.address[0] || 'An error occured' }
+                        message: error.response?.data.address[0] || error.response?.data.message || 'An error occured' }
                 });
             }
         }

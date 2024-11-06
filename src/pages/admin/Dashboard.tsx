@@ -10,6 +10,7 @@ import { Authentication } from '@/Authentication/Authenticate';
 import { useAlertStore } from '@/store/Alerts/useStoreAlerts';
 import AlertCard from '@/components/Cards/AlertCard';
 import { ConfirmationModal } from '@/components/Modal/ConfirmationModal';
+import { useDepartmentTable } from '@/store/Department/useDepartmentTable';
 
 const customIcon = L.divIcon({
   className: 'custom-marker',
@@ -22,19 +23,21 @@ const Dashboard:React.FC = () => {
 
   
 const { getUser, getID, getToken, isAuthenticated } = Authentication();
+
 const user = getUser();
 const  token = getToken()
 const userID = getID()
 const navigate = useNavigate();
 const location = useLocation();
 const { fetchAlert, alertData } = useAlertStore();
-
+const { fetchData } = useDepartmentTable();
 useEffect(() => {
   if(!isAuthenticated()){
       navigate('/', { state: { message: "You must login first", from: location.pathname } })
   }      
   
   fetchAlert(token)
+  fetchData(token)  
   
 },[user, token, userID])
 

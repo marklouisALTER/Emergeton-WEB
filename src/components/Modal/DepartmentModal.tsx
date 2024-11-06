@@ -66,7 +66,7 @@ export const DepartmentModal:React.FC = () => {
             email: "",
             contact_number: "",
             address: "",
-            status: "Available",
+            status: "available",
             tags: ""
         }
     })
@@ -74,6 +74,8 @@ export const DepartmentModal:React.FC = () => {
     function onSubmit(data: z.infer<typeof FormSchema>) {
         addData(data, token);
     }
+
+
     
 
     return (
@@ -193,9 +195,9 @@ export const DepartmentModal:React.FC = () => {
                           </SelectTrigger>
                           <SelectContent>
                             {/* <SelectItem value="Select">Select</SelectItem> */}
-                            <SelectItem value="Police">Police</SelectItem>
-                            <SelectItem value="Fire">Fire</SelectItem>
-                            <SelectItem value="Health">Health</SelectItem>
+                            <SelectItem value="police">Police</SelectItem>
+                            <SelectItem value="fire">Fire</SelectItem>
+                            <SelectItem value="health">Health</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
