@@ -22,7 +22,7 @@ const AlertCard = (props: AlertCardProps) => {
     // will passed in also the ids
     const confirmationDispatch = () => {
         // console.log(alertID);
-        openModal(1, alertID)
+        openModal(alertID)
     }
 
     console.log(isOpen);
