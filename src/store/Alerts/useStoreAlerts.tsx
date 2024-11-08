@@ -4,6 +4,7 @@ import { create } from 'zustand'
 type alertDataType = {
     message: string;
     alertType: string;
+    alert_status: string;
     date: string;
     id: string;
     residentID: string;
