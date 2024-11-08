@@ -41,9 +41,8 @@ useEffect(() => {
   
 },[user, token, userID])
 
-// alertData.map((data) => {
-//   console.log(data.alertID)
-// })
+const pendingAlerts = alertData.filter((item) => item.alert_status === 'pending');
+
 
   return (
 
@@ -118,11 +117,9 @@ useEffect(() => {
           </div>
           <h2 className='font-secondary text-white bg-primary font-medium mt-5 p-4'>Recent Emergency</h2>
             <div className='flex flex-col gap-5 h-96 overflow-y-auto overflow-x-hidden'>
-              {
-                alertData.map((data, index) => (
-                  <AlertCard key={index} {...data} />
-                ))
-              }
+            {pendingAlerts.map((data) => (
+                <AlertCard key={data.id} {...data} />
+              ))}
             </div>
         </div>
       </div>
