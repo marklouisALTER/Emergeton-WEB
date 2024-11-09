@@ -30,7 +30,7 @@ const userID = getID()
 const navigate = useNavigate();
 const location = useLocation();
 const { fetchAlert, alertData } = useAlertStore();
-const { fetchData } = useDepartmentTable();
+const { fetchData, data } = useDepartmentTable();
 useEffect(() => {
   if(!isAuthenticated()){
       navigate('/', { state: { message: "You must login first", from: location.pathname } })
@@ -42,8 +42,9 @@ useEffect(() => {
 },[user, token, userID])
 
 const pendingAlerts = alertData.filter((item) => item.alert_status === 'pending');
-
-
+const countPoliceDept = data.filter((item) => item.tags === 'police').length;
+const countFireDept = data.filter((item) => item.tags === 'fire').length;
+const countHealthDept = data.filter((item) => item.tags === 'health').length;
   return (
 
     <section className='p-5 md:pl-5'>
@@ -83,7 +84,7 @@ const pendingAlerts = alertData.filter((item) => item.alert_status === 'pending'
           <div className='mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'>
             <div className='rounded-md w-full bg-primary mt-5 p-5 relative'>
               <div className='w-full flex items-end justify-end mt-5'> 
-                <span className='font-primary text-2xl font-extrabold text-white text-right'>20</span>
+                <span className='font-primary text-2xl font-extrabold text-white text-right'>{countPoliceDept}</span>
               </div>
               <div className='absolute top-[-1rem] flex items-center justify-center left-2 w-10 h-10 bg-blue-600 rounded-md'>
                   <MdLocalPolice className='text-white text-xl'/>
@@ -94,7 +95,7 @@ const pendingAlerts = alertData.filter((item) => item.alert_status === 'pending'
             </div>
             <div className='rounded-md w-full bg-red-600/80 mt-5 p-5 relative'>
               <div className='w-full flex items-end justify-end mt-5'> 
-                <span className='font-primary text-2xl font-extrabold text-white text-right'>5</span>
+                <span className='font-primary text-2xl font-extrabold text-white text-right'>{countFireDept}</span>
               </div>
               <div className='absolute top-[-1rem] flex items-center justify-center left-2 w-10 h-10 bg-red-600 rounded-md'>
                   <MdFireTruck className='text-white text-xl'/>
@@ -105,7 +106,7 @@ const pendingAlerts = alertData.filter((item) => item.alert_status === 'pending'
             </div>
             <div className='rounded-md w-full bg-green-600/80 mt-5 p-5 relative'>
               <div className='w-full flex items-end justify-end mt-5'> 
-                <span className='font-primary text-2xl font-extrabold text-white text-right'>5</span>
+                <span className='font-primary text-2xl font-extrabold text-white text-right'>{countHealthDept}</span>
               </div>
               <div className='absolute top-[-1rem] flex items-center justify-center left-2 w-10 h-10 bg-green-600 rounded-md'>
                   <MdHealthAndSafety className='text-white text-xl'/>
