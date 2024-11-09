@@ -57,6 +57,12 @@ export type SidebarLink = {
         icon: <MdEmergencyShare size={20} />,
     },
     {
+        key: 'residents',
+        label: 'Residents',
+        path: '/admin/residents',
+        icon: <FaUserAlt size={20} />,
+    },
+    {
         key: 'profile',
         label: 'Profile',
         path: '/admin/profile',
