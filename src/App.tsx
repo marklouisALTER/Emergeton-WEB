@@ -9,6 +9,7 @@ import { UserLayout } from './layout/UserLayout'
 import Dashboard from './pages/admin/Dashboard'
 import Profile from './pages/admin/Profile'
 import { Department } from './pages/admin/Department'
+import { Residents } from './pages/admin/Residents'
 function App() {
   
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='dashboard' element={<Dashboard />} />
           <Route path='profile' element={<Profile />} />
           <Route path='department' element={<Department />} />
+          <Route path='residents' element={<Residents />} />
         </Route>
         <Route path='login' element={<Login />} />
         <Route path='/' element={<AdminLogin />} />

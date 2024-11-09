@@ -51,7 +51,7 @@ const FormSchema = z.object({
     status: z.string({
         message: "Status is required",
     }).min(3).max(20),
-    tags: z.string().nonempty({ message: "Tags is required" }),
+    tags: z.string({ message: "Tags is required" }),
   })
 
 export const DepartmentModal:React.FC = () => {
