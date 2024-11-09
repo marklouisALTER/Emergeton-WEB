@@ -83,7 +83,7 @@ export const DepartmentModal:React.FC = () => {
         <DialogTrigger className='font-sans bg-primary px-5 py-2 rounded-md text-white hover:bg-primary/80
         transition-all delay-75 ease-in-out flex items-center gap-2'>
           <AiFillFileAdd className='text-xl' />
-          New Request
+          Add Department
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
@@ -103,7 +103,7 @@ export const DepartmentModal:React.FC = () => {
                         <FormLabel className='font-sans font-semibold mt-2'>Name</FormLabel>
                         <Input
                         id="name"
-                        placeholder="Enter your name here"
+                        placeholder="Enter department name"
                         className='border border-gray-400 rounded-md w-full p-2'
                         {...field}
                         />
@@ -119,7 +119,7 @@ export const DepartmentModal:React.FC = () => {
                         <FormLabel className='font-sans font-semibold mt-2'>Email</FormLabel>
                         <Input
                         id="email"
-                        placeholder="Enter your email here"
+                        placeholder="Enter department email here"
                         className='border border-gray-400 rounded-md w-full p-2'
                         {...field}
                         />
@@ -137,7 +137,7 @@ export const DepartmentModal:React.FC = () => {
                         <FormLabel className='font-sans font-semibold mt-2'>Contact Number</FormLabel>
                         <Input
                         id="contact_number"
-                        placeholder="Enter your contact number here"
+                        placeholder="Enter department contact number here"
                         className='border border-gray-400 rounded-md w-full p-2'
                         {...field}
                         />
@@ -153,7 +153,7 @@ export const DepartmentModal:React.FC = () => {
                         <FormLabel className='font-sans font-semibold mt-2'>Address</FormLabel>
                         <Input
                         id="address"
-                        placeholder="Enter your address here"
+                        placeholder="Enter department address here"
                         className='border border-gray-400 rounded-md w-full p-2'
                         {...field}
                         />

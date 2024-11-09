@@ -195,7 +195,7 @@ export const ResidentTable:React.FC = () => {
                     okText="Yes"
                     cancelText="No"
                 >
-                   <Button type="primary" size='small' className='px-4 py-2 font-secondary text-xs' disabled={record.verified ? true : false}>{record.verified ? 'Verified' : 'Verify'}</Button>
+                   <Button type="primary" size='small' className='px-5 py-3 font-secondary text-xs' disabled={record.verified ? true : false}>{record.verified ? 'Verified' : 'Verify'}</Button>
                     {/* <Button type="primary" danger size='small' loading={isLoading}>Delete</Button> */}
                 </Popconfirm>
             </Space>
