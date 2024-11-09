@@ -1,9 +1,9 @@
 import { useDispatchModalStore } from "@/store/Modal/useDispatchModal";
-
+import { getTimeDifference } from "@/lib/dateFormat";
 type AlertCardProps = {
     message: string;
     alertType: string;
-    date: string;
+    created_at: string;
     id: string;
     residentID: string;
     latitude: number;
@@ -31,7 +31,7 @@ return (
     <div key={props.id} className='relative w-full rounded-lg bg-white shadow-lg p-5 cursor-pointer transition-transform ease-in-out hover:scale-[1.02] hover:shadow-xl'>
         <div className='flex items-center justify-between'>
         <h3 className='font-secondary text-red-600 font-semibold text-lg animate-pulse'>🚨 Emergency Alert</h3>
-        <span className='text-xs text-gray-500'>2 mins ago</span>
+        <span className='text-xs text-gray-500'>{getTimeDifference(props.created_at)}</span>
         </div>
         <div className='mt-4'>
         <p className='font-secondary text-gray-500 text-sm'>
