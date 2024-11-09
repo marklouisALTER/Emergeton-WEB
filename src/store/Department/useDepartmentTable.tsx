@@ -127,7 +127,7 @@ export const useDepartmentTable = create<departmentTableProps>((set) => ({
                     error: true, 
                     response: { 
                         title: error.response?.data?.title || 'Error',
-                        message: error.response?.data.address[0] || error.response?.data.message || 'An error occured' }
+                        message: error.response?.data.message || 'There was an error.' }
                 });
             }
         }

@@ -2,6 +2,7 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { MdEmergencyShare } from "react-icons/md";
 import { FaUserAlt } from "react-icons/fa";
 import { IoExit } from "react-icons/io5";
+import { FaUsers } from "react-icons/fa";
 
 export type SidebarLink = {
     key: string;
@@ -28,6 +29,12 @@ export type SidebarLink = {
       label: 'Department',
       path: '/admin/department',
       icon: <MdEmergencyShare />,
+    },
+    {
+      key: 'residents',
+      label: 'Residents',
+      path: '/admin/residents',
+      icon: <FaUsers />,
     },
     {
       key: 'profile',
@@ -60,7 +67,7 @@ export type SidebarLink = {
         key: 'residents',
         label: 'Residents',
         path: '/admin/residents',
-        icon: <FaUserAlt size={20} />,
+        icon: <FaUsers size={20} />,
     },
     {
         key: 'profile',
