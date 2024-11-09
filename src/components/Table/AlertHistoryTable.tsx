@@ -6,12 +6,13 @@ import { SearchOutlined } from '@ant-design/icons';
 import type { FilterDropdownProps } from 'antd/es/table/interface';
 import { useAlertStore } from '@/store/Alerts/useStoreAlerts';
 import { useDispatchModalStore } from '@/store/Modal/useDispatchModal';
-
+import { FaMapPin } from "react-icons/fa6";
+import moment from 'moment';
 type AlertHistoryDataType = {
     message: string;
     alert_type: string;
     alert_status: string;
-    created_at: string;
+    created_at: number;
     id: string;
     residentID: string;
     latitude: number;
@@ -131,24 +132,19 @@ export const AlertHistoryTable:React.FC = () => {
             return (
             <div className='flex items-center justify-center'>
                 <span className={`${record.alert_status === 'pending' ? 'bg-yellow-500' : record.alert_status === 'ongoing' ? 'bg-green-500' : 'bg-gray-300'} text-white px-2 py-1 rounded-md`}>
-                    {record.alert_status === 'pending' ? 'Pending' : record.alert_status === 'ongoing' ? 'Deployed' : 'Dismissed'}
+                    {record.alert_status === 'pending' ? 'Pending' : record.alert_status === 'ongoing' ? 'Ongoing' : record.alert_status === 'dismissed' ? 'Dismissed' : 'Done'}
                 </span>
             </div>
             )
         }
     },
     {
-        title: 'First Name',
-        dataIndex: 'first_name',
-        key: 'first_name',
-        sorter: (a, b) => a.first_name.length - b.first_name.length,
-    },
-    {
-        title: 'Last Name',
-        dataIndex: 'last_name',
-        key: 'last_name',
-        ...getColumnSearchProps('last_name'),
-        sorter: (a, b) => a.last_name.length - b.last_name.length,
+        title: 'Full Name',
+        dataIndex: 'full_name',
+        key: 'full_name',
+        render: (_, record) => {
+            return `${record.first_name} ${record.last_name}`;
+        }
     },
     {
         title: 'Address',
@@ -158,11 +154,22 @@ export const AlertHistoryTable:React.FC = () => {
         render: (_, record) => {
             const googleMapUrl = `https://www.google.com/maps?q=${record.latitude},${record.longitude}`;
             return (
-                <a href={googleMapUrl} target="_blank" rel="noopener noreferrer">
+                <a href={googleMapUrl} target="_blank" className='flex gap-2' rel="noopener noreferrer">
+                    <FaMapPin className='text-red-500'/>
                     {record.address}
                 </a>
             );
         },
+    },
+    {
+        title: 'Date Created',
+        dataIndex: 'created_at',
+        key: 'created_at',
+        sorter: (a, b) => a.created_at - b.created_at,
+        render: (_, record) => {
+            return moment.unix(record.created_at).format('MMMM Do YYYY, h:mm:ss A');
+        }
+        
     },
     {
         title: 'Requested Alert Type',
@@ -201,7 +208,7 @@ export const AlertHistoryTable:React.FC = () => {
                 size='small' 
                 className='px-4 py-2 font-secondary text-xs' 
                 disabled={record.alert_status === 'pending' ? false : true}>
-                {record.alert_status === 'pending' ? 'Send Response' : record.alert_status === 'ongoing' ? 'Deployed' : 'Dismissed'}
+                {record.alert_status === 'pending' ? 'Send Response' : record.alert_status === 'ongoing' ? 'Ongoing' : record.alert_status === 'dismissed' ? 'Dismissed' : 'Done'}
             </Button>
             //     </Popconfirm>
             // </Space>

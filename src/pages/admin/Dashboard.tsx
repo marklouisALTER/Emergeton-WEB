@@ -12,9 +12,23 @@ import AlertCard from '@/components/Cards/AlertCard';
 import { ConfirmationModal } from '@/components/Modal/ConfirmationModal';
 import { useDepartmentTable } from '@/store/Department/useDepartmentTable';
 
-const customIcon = L.divIcon({
+const policeIcon = L.divIcon({
   className: 'custom-marker',
-  html: "<div style='background-color: red; width: 25px; height: 25px; border-radius: 50%; border: 2px solid white;'></div>",
+  html: `<div style='background-color: blue; width: 25px; height: 25px; border-radius: 50%; border: 2px solid white;'></div>`,
+  iconSize: [10, 10],
+  popupAnchor: [0, -15],
+});
+
+const fireIcon = L.divIcon({
+  className: 'custom-marker',
+  html: `<div style='background-color: red; width: 25px; height: 25px; border-radius: 50%; border: 2px solid white;'></div>`,
+  iconSize: [10, 10],
+  popupAnchor: [0, -15],
+});
+
+const healthIcon = L.divIcon({
+  className: 'custom-marker',
+  html: `<div style='background-color: green; width: 25px; height: 25px; border-radius: 50%; border: 2px solid white;'></div>`,
   iconSize: [10, 10],
   popupAnchor: [0, -15],
 });
@@ -55,7 +69,7 @@ const countHealthDept = data.filter((item) => item.tags === 'health').length;
             <h3 className='font-secondary text-black/80 font-medium'>Emergency Map</h3>
             <p className='font-secondary text-gray-400 text-xs'>It will show here all the emergency in the vicinity</p>  
           </div>
-          <MapContainer center={[14.653740, 120.960177]} zoom={15} style={{ height: '50vh', width: '100%' }}>
+          <MapContainer center={[14.653740, 120.960177]} zoom={12} className='h-[50vh] md:h-[75vh]' style={{ width: '100%' }}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -63,13 +77,18 @@ const countHealthDept = data.filter((item) => item.tags === 'health').length;
             {
               alertData.map((data) => {
                 return (
-                  <Marker position={[data.latitude, data.longitude]} icon={customIcon}>
+                  <Marker position={[data.latitude, data.longitude]} 
+                    icon={data.alert_type === 'fire' ? fireIcon : data.alert_type === 'police' ? policeIcon : healthIcon} key={data.id}>
                     <Popup>
                       <div>
                         <h3 className='font-secondary text-black/80 font-medium'>Emergency</h3>
                         <p className='font-secondary text-gray-400 text-xs'>Name: <span className='text-black/70'>{data.message}</span></p>
                         <p className='font-secondary text-gray-400 text-xs'>Location: <span className='text-black/70'>{data.address}</span></p>
-                        <p className='font-secondary text-gray-400 text-xs'>Remarks: <span className='text-black/70'>{data.alert_type}</span></p>
+                        <p className='font-secondary text-gray-400 text-xs'>Alert Type: 
+                          <span className={`ml-1 text-black/70 ${data.alert_type === 'fire' ? 'bg-red-500' : data.alert_type === 'police' ? 'bg-blue-500' : 'bg-green-500'} text-white px-2 py-1 rounded-md`}>
+                            {data.alert_type === 'fire' ? 'Fire' : data.alert_type === 'police' ? 'Police' : 'Health'}
+                          </span>
+                        </p>
                       </div>
                     </Popup>
                   </Marker>
@@ -118,9 +137,9 @@ const countHealthDept = data.filter((item) => item.tags === 'health').length;
           </div>
           <h2 className='font-secondary text-white bg-primary font-medium mt-5 p-4'>Recent Emergency</h2>
             <div className='flex flex-col gap-5 h-96 overflow-y-auto overflow-x-hidden'>
-            {pendingAlerts.map((data) => (
+            {pendingAlerts?.map((data) => (
                 <AlertCard key={data.id} {...data} />
-              ))}
+              ))|| <div>No data</div>}
             </div>
         </div>
       </div>
