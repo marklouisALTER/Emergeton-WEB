@@ -5,7 +5,7 @@ type alertDataType = {
     message: string;
     alert_type: string;
     alert_status: string;
-    created_at: string;
+    created_at: number;
     id: string;
     residentID: string;
     latitude: number;
