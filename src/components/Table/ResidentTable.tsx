@@ -190,7 +190,7 @@ export const ResidentTable:React.FC = () => {
             <Space size={5}>
                 <Popconfirm
                     title="Delete the task"
-                    description="Are you sure to delete this task?"
+                    description="Are you sure to verify this user?"
                     onConfirm={() =>  setResidentVerify(token, record.id)}
                     okText="Yes"
                     cancelText="No"
