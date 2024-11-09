@@ -3,6 +3,7 @@ import { MdEmergencyShare } from "react-icons/md";
 import { FaUserAlt } from "react-icons/fa";
 import { IoExit } from "react-icons/io5";
 import { FaUsers } from "react-icons/fa";
+import { PiClockCountdownFill } from "react-icons/pi";
 
 export type SidebarLink = {
     key: string;
@@ -37,6 +38,12 @@ export type SidebarLink = {
       icon: <FaUsers />,
     },
     {
+      key: 'alert_history',
+      label: 'Alert History',
+      path: '/admin/alert-history',
+      icon: <PiClockCountdownFill />,
+    },
+    {
       key: 'profile',
       label: 'Profile',
       path: '/admin/profile',
@@ -68,6 +75,12 @@ export type SidebarLink = {
         label: 'Residents',
         path: '/admin/residents',
         icon: <FaUsers size={20} />,
+    },
+    {
+      key: 'alert_history',
+      label: 'Alert History',
+      path: '/admin/alert-history',
+      icon: <PiClockCountdownFill size={20} />,
     },
     {
         key: 'profile',
