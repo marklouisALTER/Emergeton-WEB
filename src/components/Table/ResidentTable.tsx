@@ -48,6 +48,8 @@ export const ResidentTable:React.FC = () => {
     setSearchText('');
   };
 
+  const sortResidentData = residents.sort((a, b) => a.verified === b.verified ? 0 : a.verified ? 1 : -1);
+
 
   const getColumnSearchProps = (dataIndex: DataIndex): TableColumnType<DepartmentTableType> => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
@@ -193,7 +195,7 @@ export const ResidentTable:React.FC = () => {
                     okText="Yes"
                     cancelText="No"
                 >
-                   <Button type="primary" size='small'>Verify</Button>
+                   <Button type="primary" size='small' className='px-4 py-2 font-secondary text-xs' disabled={record.verified ? true : false}>{record.verified ? 'Verified' : 'Verify'}</Button>
                     {/* <Button type="primary" danger size='small' loading={isLoading}>Delete</Button> */}
                 </Popconfirm>
             </Space>
@@ -217,7 +219,7 @@ export const ResidentTable:React.FC = () => {
       columns={columns} 
       loading={isLoading}
       pagination={{pageSize: 5}}
-      dataSource={residents}
+      dataSource={sortResidentData}
       rowHoverable={true}
     />
   </ConfigProvider>
