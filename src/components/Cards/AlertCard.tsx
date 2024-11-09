@@ -2,7 +2,7 @@ import { useDispatchModalStore } from "@/store/Modal/useDispatchModal";
 import { getTimeDifference } from "@/lib/dateFormat";
 type AlertCardProps = {
     message: string;
-    alertType: string;
+    alert_type: string;
     created_at: string;
     id: string;
     residentID: string;
@@ -16,17 +16,14 @@ type AlertCardProps = {
 
 const AlertCard = (props: AlertCardProps) => {
     
-    const { openModal, isOpen } = useDispatchModalStore();
+    const { openModal } = useDispatchModalStore();
     const alertID = props.id;
     
     // will passed in also the ids
     const confirmationDispatch = () => {
         // console.log(alertID);
-        openModal(alertID)
+        openModal(alertID);
     }
-
-    console.log(isOpen);
-
 return (
     <div key={props.id} className='relative w-full rounded-lg bg-white shadow-lg p-5 cursor-pointer transition-transform ease-in-out hover:scale-[1.02] hover:shadow-xl'>
         <div className='flex items-center justify-between'>

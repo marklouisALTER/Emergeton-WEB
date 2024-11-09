@@ -10,6 +10,7 @@ import Dashboard from './pages/admin/Dashboard'
 import Profile from './pages/admin/Profile'
 import { Department } from './pages/admin/Department'
 import { Residents } from './pages/admin/Residents'
+import { AlertHistory } from './pages/admin/AlertHistory'
 function App() {
   
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path='profile' element={<Profile />} />
           <Route path='department' element={<Department />} />
           <Route path='residents' element={<Residents />} />
+          <Route path='alert-history' element={<AlertHistory />} />
         </Route>
         <Route path='login' element={<Login />} />
         <Route path='/' element={<AdminLogin />} />
