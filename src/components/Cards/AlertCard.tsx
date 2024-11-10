@@ -29,7 +29,7 @@ const AlertCard = (props: AlertCardProps) => {
         <div key={props.id} className='relative w-full rounded-lg bg-white shadow-lg p-5 cursor-pointer transition-transform ease-in-out hover:scale-[1.02] hover:shadow-xl'>
             <div className='flex items-center justify-between'>
                 <h3 className='font-secondary text-red-600 font-semibold text-lg animate-pulse'>🚨 Emergency Alert</h3>
-                <p className='font-secondary text-gray-500 text-sm'>{createdTimeAgo}</p>
+                <p className='font-secondary text-gray-500 text-sm'>{moment().diff(props.created_at, 'minutes') < 5 ? 'Just now' : createdTimeAgo}</p>
             </div>
             <div className='mt-4'>
                 <p className='font-secondary text-gray-500 text-sm'>
@@ -42,7 +42,10 @@ const AlertCard = (props: AlertCardProps) => {
                     <span className='text-gray-800 font-medium'>Message:</span> <span className='text-black/70'>{props.message}</span>
                 </p>
                 <p className='font-secondary text-gray-500 text-sm'>
-                    <span className='text-gray-800 font-medium'>Alert type:</span> <span className='text-black/70'>{props.alert_type}</span>
+                    <span className='text-gray-800 font-medium'>Alert type:</span>
+                    <span className={`ml-1 text-black/70 ${props.alert_type === 'fire' ? 'bg-red-500' : props.alert_type === 'police' ? 'bg-blue-500' : 'bg-green-500'} text-white px-2 py-1 rounded-md`}>
+                            {props.alert_type === 'fire' ? 'FIRE' : props.alert_type === 'police' ? 'POLICE' : 'MEDICAL'}
+                    </span>
                 </p>
             </div>
             <div className='mt-4 w-full flex justify-between items-center'>

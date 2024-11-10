@@ -86,7 +86,7 @@ const countHealthDept = data.filter((item) => item.tags === 'health').length;
                         <p className='font-secondary text-gray-400 text-xs'>Location: <span className='text-black/70'>{data.address}</span></p>
                         <p className='font-secondary text-gray-400 text-xs'>Alert Type: 
                           <span className={`ml-1 text-black/70 ${data.alert_type === 'fire' ? 'bg-red-500' : data.alert_type === 'police' ? 'bg-blue-500' : 'bg-green-500'} text-white px-2 py-1 rounded-md`}>
-                            {data.alert_type === 'fire' ? 'Fire' : data.alert_type === 'police' ? 'Police' : 'MEDICAL'}
+                            {data.alert_type === 'fire' ? 'FIRE' : data.alert_type === 'police' ? 'POLICE' : 'MEDICAL'}
                           </span>
                         </p>
                       </div>

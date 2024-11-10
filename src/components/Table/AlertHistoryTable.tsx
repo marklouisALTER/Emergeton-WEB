@@ -167,7 +167,7 @@ export const AlertHistoryTable:React.FC = () => {
         key: 'created_at',
         sorter: (a, b) => a.created_at - b.created_at,
         render: (_, record) => {
-            return moment.unix(record.created_at).format('MMMM Do YYYY, h:mm:s A');
+            return moment(record.created_at, 'X').format('MMMM DD, YYYY');
         }
         
     },
