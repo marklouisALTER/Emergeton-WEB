@@ -5,6 +5,7 @@ import { IoExit } from "react-icons/io5";
 import { FaUsers } from "react-icons/fa";
 import { PiClockCountdownFill } from "react-icons/pi";
 
+
 export type SidebarLink = {
     key: string;
     label: string;
@@ -52,8 +53,8 @@ export type SidebarLink = {
     {
       key: 'logout',
       label: 'Logout',
-      path: '/logout',
       icon: <IoExit />,
+
     },
   ];
   

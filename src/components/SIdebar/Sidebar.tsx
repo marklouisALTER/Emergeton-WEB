@@ -1,9 +1,11 @@
 import React from 'react'
 import { SIDEBAR_LINKS, SidebarLink } from '../../lib/dashboardlinks'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import TabletSidebar from './TabletSidebar'
+import { Authentication } from "@/Authentication/Authenticate";
 
 const Sidebar:React.FC = () => {
+
   return (
     <>
     <TabletSidebar />
@@ -25,6 +27,7 @@ const Sidebar:React.FC = () => {
   )
 }
 
+
 export default Sidebar
 
 type SidebarItemsProps = {
@@ -36,11 +39,20 @@ type SidebarItemsProps = {
 export function SidebarItems({ item }: SidebarItemsProps) {
 
   const path = useLocation().pathname;
+  const navigate = useNavigate();
+  const { logout } = Authentication();
 
   const isActive = () => {
     return item.path === path;
   };
 
+  const handleClick = (e: React.MouseEvent) => {
+    if (item.key === 'logout') {
+      e.preventDefault(); // Prevent navigation
+      logout();
+      navigate('..');
+    }
+  };
   return (
     <>
       <li
@@ -48,6 +60,7 @@ export function SidebarItems({ item }: SidebarItemsProps) {
       >
         <Link
           to={item?.path || ''}
+          onClick={handleClick}
           className="flex font-medium w-40 items-center gap-2 hover:text-white"
         >
           {item.icon}

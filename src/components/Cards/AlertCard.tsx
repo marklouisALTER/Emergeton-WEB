@@ -22,7 +22,7 @@ const AlertCard = (props: AlertCardProps) => {
     const createdTimeAgo = moment(props.created_at, 'X').fromNow(); 
 
     const confirmationDispatch = () => {
-        openModal(alertID);
+        openModal(alertID, props.alert_type);
     }
 
     return (
