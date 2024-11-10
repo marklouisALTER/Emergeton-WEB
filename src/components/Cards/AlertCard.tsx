@@ -42,7 +42,10 @@ const AlertCard = (props: AlertCardProps) => {
                     <span className='text-gray-800 font-medium'>Message:</span> <span className='text-black/70'>{props.message}</span>
                 </p>
                 <p className='font-secondary text-gray-500 text-sm'>
-                    <span className='text-gray-800 font-medium'>Alert type:</span> <span className='text-black/70'>{props.alert_type}</span>
+                    <span className='text-gray-800 font-medium'>Alert type:</span>
+                    <span className={`ml-1 text-black/70 ${props.alert_type === 'fire' ? 'bg-red-500' : props.alert_type === 'police' ? 'bg-blue-500' : 'bg-green-500'} text-white px-2 py-1 rounded-md`}>
+                            {props.alert_type === 'fire' ? 'FIRE' : props.alert_type === 'police' ? 'POLICE' : 'MEDICAL'}
+                    </span>
                 </p>
             </div>
             <div className='mt-4 w-full flex justify-between items-center'>
