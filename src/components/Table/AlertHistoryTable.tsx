@@ -206,9 +206,9 @@ export const AlertHistoryTable:React.FC = () => {
                 type="primary" 
                 onClick={() => openModal(record.id)}
                 size='small' 
-                className='px-3 py-4 font-secondary text-sm' 
+                className='px-3 py-4 font-secondary text-xs' 
                 disabled={record.alert_status === 'pending' ? false : true}>
-                {record.alert_status === 'pending' ? 'Send Response' : record.alert_status === 'ongoing' ? 'Ongoing' : record.alert_status === 'dismissed' ? 'Dismissed' : 'Done'}
+                {record.alert_status === 'pending' ? 'Send Dispatch' : record.alert_status === 'ongoing' ? 'Ongoing' : record.alert_status === 'dismissed' ? 'Dismissed' : 'Done'}
             </Button>
             //     </Popconfirm>
             // </Space>
