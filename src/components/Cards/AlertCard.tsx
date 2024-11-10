@@ -33,7 +33,7 @@ const AlertCard = (props: AlertCardProps) => {
             </div>
             <div className='mt-4'>
                 <p className='font-secondary text-gray-500 text-sm'>
-                    <span className='text-gray-800 font-medium'>Requestor:</span> <span className='text-black/70'>{props.first_name} {props.last_name}</span>
+                    <span className='text-gray-800 font-medium'>Resident:</span> <span className='text-black/70'>{props.first_name} {props.last_name}</span>
                 </p>
                 <p className='font-secondary text-gray-500 text-sm'>
                     <span className='text-gray-800 font-medium'>Address:</span> <span className='text-black/70'>{props.address}</span>
@@ -42,7 +42,7 @@ const AlertCard = (props: AlertCardProps) => {
                     <span className='text-gray-800 font-medium'>Message:</span> <span className='text-black/70'>{props.message}</span>
                 </p>
                 <p className='font-secondary text-gray-500 text-sm'>
-                    <span className='text-gray-800 font-medium'>Alert Type:</span> <span className='text-black/70'>{props.alert_type}</span>
+                    <span className='text-gray-800 font-medium'>Alert type:</span> <span className='text-black/70'>{props.alert_type}</span>
                 </p>
             </div>
             <div className='mt-4 w-full flex justify-between items-center'>

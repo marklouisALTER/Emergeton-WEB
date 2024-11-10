@@ -131,7 +131,7 @@ export const AlertHistoryTable:React.FC = () => {
         render: (_, record) => {
             return (
             <div className='flex items-center justify-center'>
-                <span className={`${record.alert_status === 'pending' ? 'bg-yellow-500' : record.alert_status === 'ongoing' ? 'bg-green-500' : 'bg-gray-300'} text-white px-2 py-1 rounded-md`}>
+                <span className={`${record.alert_status === 'pending' ? 'bg-yellow-500' : record.alert_status === 'ongoing' ? 'bg-green-500' : 'bg-gray-300'} text-white px-2 py-1 rounded-md font-semibold`}>
                     {record.alert_status === 'pending' ? 'Pending' : record.alert_status === 'ongoing' ? 'Ongoing' : record.alert_status === 'dismissed' ? 'Dismissed' : 'Done'}
                 </span>
             </div>
@@ -154,7 +154,7 @@ export const AlertHistoryTable:React.FC = () => {
         render: (_, record) => {
             const googleMapUrl = `https://www.google.com/maps?q=${record.latitude},${record.longitude}`;
             return (
-                <a href={googleMapUrl} target="_blank" className='flex gap-2' rel="noopener noreferrer">
+                <a href={googleMapUrl} target="_blank" className='flex gap-2 hover:underline' rel="noopener noreferrer">
                     <FaMapPin className='text-red-500'/>
                     {record.address}
                 </a>
@@ -167,7 +167,7 @@ export const AlertHistoryTable:React.FC = () => {
         key: 'created_at',
         sorter: (a, b) => a.created_at - b.created_at,
         render: (_, record) => {
-            return moment.unix(record.created_at).format('MMMM Do YYYY, h:mm:ss A');
+            return moment.unix(record.created_at).format('MMMM Do YYYY, h:mm:s A');
         }
         
     },
@@ -180,8 +180,8 @@ export const AlertHistoryTable:React.FC = () => {
         render: (_, record) => {
             return (
             <div className='flex items-center justify-center'>
-                <span className={`${record.alert_type === 'fire' ? 'bg-red-500' : record.alert_type === 'police' ? 'bg-blue-500' : 'bg-green-500'} text-white px-2 py-1 rounded-md`}>
-                    {record.alert_type === 'fire' ? 'Fire' : record.alert_type === 'police' ? 'Police' : 'Health'}
+                <span className={`${record.alert_type === 'fire' ? 'bg-red-500' : record.alert_type === 'police' ? 'bg-blue-500' : 'bg-green-500'} text-white px-2 py-1 rounded-md font-semibold`}>
+                    {record.alert_type === 'fire' ? 'FIRE' : record.alert_type === 'police' ? 'POLICE' : 'HEALTH'}
                 </span>
             </div>
             )
@@ -206,7 +206,7 @@ export const AlertHistoryTable:React.FC = () => {
                 type="primary" 
                 onClick={() => openModal(record.id)}
                 size='small' 
-                className='px-4 py-2 font-secondary text-xs' 
+                className='px-5 py-3 font-secondary text-xs' 
                 disabled={record.alert_status === 'pending' ? false : true}>
                 {record.alert_status === 'pending' ? 'Send Response' : record.alert_status === 'ongoing' ? 'Ongoing' : record.alert_status === 'dismissed' ? 'Dismissed' : 'Done'}
             </Button>

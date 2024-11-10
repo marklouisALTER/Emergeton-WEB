@@ -131,7 +131,7 @@ const countHealthDept = data.filter((item) => item.tags === 'health').length;
                   <MdHealthAndSafety className='text-white text-xl'/>
               </div>
               <div className='absolute top-[-0.4rem] flex items-center justify-center right-2 px-3 py-1 bg-green-700 rounded-md'>
-                <p className='text-white text-[11px]'>Health care</p>
+                <p className='text-white text-[11px]'>Medical</p>
               </div>
             </div>
           </div>
