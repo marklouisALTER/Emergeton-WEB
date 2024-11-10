@@ -197,7 +197,7 @@ export const DepartmentModal:React.FC = () => {
                             {/* <SelectItem value="Select">Select</SelectItem> */}
                             <SelectItem value="police">Police</SelectItem>
                             <SelectItem value="fire">Fire</SelectItem>
-                            <SelectItem value="health">Health</SelectItem>
+                            <SelectItem value="health">Medical</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
