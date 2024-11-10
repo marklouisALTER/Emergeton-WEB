@@ -29,7 +29,7 @@ const AlertCard = (props: AlertCardProps) => {
         <div key={props.id} className='relative w-full rounded-lg bg-white shadow-lg p-5 cursor-pointer transition-transform ease-in-out hover:scale-[1.02] hover:shadow-xl'>
             <div className='flex items-center justify-between'>
                 <h3 className='font-secondary text-red-600 font-semibold text-lg animate-pulse'>🚨 Emergency Alert</h3>
-                <p className='font-secondary text-gray-500 text-sm'>{createdTimeAgo}</p>
+                <p className='font-secondary text-gray-500 text-sm'>{moment().diff(props.created_at, 'minutes') < 5 ? 'Just now' : createdTimeAgo}</p>
             </div>
             <div className='mt-4'>
                 <p className='font-secondary text-gray-500 text-sm'>
