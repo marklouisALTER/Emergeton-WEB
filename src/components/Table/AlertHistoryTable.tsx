@@ -181,7 +181,7 @@ export const AlertHistoryTable:React.FC = () => {
             return (
             <div className='flex items-center justify-center'>
                 <span className={`${record.alert_type === 'fire' ? 'bg-red-500' : record.alert_type === 'police' ? 'bg-blue-500' : 'bg-green-500'} text-white px-2 py-1 rounded-md font-semibold`}>
-                    {record.alert_type === 'fire' ? 'FIRE' : record.alert_type === 'police' ? 'POLICE' : 'HEALTH'}
+                    {record.alert_type === 'fire' ? 'FIRE' : record.alert_type === 'police' ? 'POLICE' : 'MEDICAL'}
                 </span>
             </div>
             )
@@ -206,7 +206,7 @@ export const AlertHistoryTable:React.FC = () => {
                 type="primary" 
                 onClick={() => openModal(record.id)}
                 size='small' 
-                className='px-5 py-3 font-secondary text-xs' 
+                className='px-4 py-4 font-secondary text-sm' 
                 disabled={record.alert_status === 'pending' ? false : true}>
                 {record.alert_status === 'pending' ? 'Send Response' : record.alert_status === 'ongoing' ? 'Ongoing' : record.alert_status === 'dismissed' ? 'Dismissed' : 'Done'}
             </Button>
