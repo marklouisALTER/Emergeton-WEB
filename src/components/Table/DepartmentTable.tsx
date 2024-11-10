@@ -125,6 +125,19 @@ export const DepartmentTable:React.FC = () => {
   });
   const columns: TableColumnsType<DepartmentTableType> = [
     {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      fixed: 'left',
+      render: (_, record) => (
+        <div className='flex items-center justify-center'>
+            <span className={`${record.status === 'available' ? 'bg-green-500' : 'bg-red-500'} text-white px-2 py-1 rounded-md font-semibold`}>
+                {record.status === 'available' ? 'AVAILABLE' : 'DISPATCHED'}
+            </span>
+        </div>
+      )
+  },
+    {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
@@ -151,14 +164,16 @@ export const DepartmentTable:React.FC = () => {
         width: 300,
     },
     {
-        title: 'Status',
-        dataIndex: 'status',
-        key: 'status',
-    },
-    {
         title: 'Tags',
         dataIndex: 'tags',
         key: 'tags',
+        render: (_, record) => (
+          <div className='flex items-center justify-center'>
+              <span className={`${record.tags === 'fire' ? 'bg-red-500' : record.tags === 'police' ? 'bg-blue-500' : 'bg-green-500'} text-white px-2 py-1 rounded-md font-semibold`}>
+                  {record.tags === 'fire' ? 'FIRE' : record.tags === 'police' ? 'POLICE' : 'MEDICAL'}
+              </span>
+          </div>
+        )
     },
     {
         title: 'Date Created',

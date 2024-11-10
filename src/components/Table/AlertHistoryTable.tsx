@@ -204,7 +204,7 @@ export const AlertHistoryTable:React.FC = () => {
             //     >
             <Button 
                 type="primary" 
-                onClick={() => openModal(record.id)}
+                onClick={() => openModal(record.id, record.alert_type)}
                 size='small' 
                 className='px-3 py-4 font-secondary text-xs' 
                 disabled={record.alert_status === 'pending' ? false : true}>
