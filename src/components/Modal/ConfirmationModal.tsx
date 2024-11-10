@@ -94,7 +94,7 @@ export const ConfirmationModal: React.FC = () => {
                                 item.tags === 'police' ? 'bg-blue-700' : item.tags === 'fire' ? 'bg-red-700' : 'bg-green-700'
                             } text-white px-2 py-1 ml-2 rounded-md font-medium`}
                         >
-                            {item.tags.toUpperCase()}
+                            {item.tags === 'health' ? 'MEDICAL' : item.tags.toUpperCase()}
                         </span>
                     </Select.Option>
                 ))}
