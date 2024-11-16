@@ -5,10 +5,11 @@ import { useDepartmentTable } from '@/store/Department/useDepartmentTable';
 import React, { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast, Toaster } from 'sonner';
+
 export const Department:React.FC = () => {
   
   const { getToken, isAuthenticated } = Authentication();
-  const { fetchData, response, error, success } = useDepartmentTable();
+  const { fetchData, response, request_status } = useDepartmentTable();
   const  token = getToken()
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,13 +23,14 @@ export const Department:React.FC = () => {
 }, []); // Empty dependency array ensures it only runs once on mount
 
 useEffect(() => {
-    if (error) {
-        toast.error(response.message);
-    } else if (success) {
-        toast.success(response.message);
+    if (request_status === 'error') {
+        toast.error(response.message)
     }
-}, [error, success, response]);
-// console.log(response.message)
+    if (request_status === 'success') {
+        toast.success(response.message)
+    }
+},[request_status, response]);
+
 
   return (
     <section className='p-5 md:pl-5'>
