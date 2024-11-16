@@ -6,6 +6,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import type { FilterDropdownProps } from 'antd/es/table/interface';
 import { useDepartmentTable } from '@/store/Department/useDepartmentTable';
 import { Authentication } from '@/Authentication/Authenticate';
+import moment from 'moment';
 
 type DepartmentTableType = {
     id: number;
@@ -25,7 +26,7 @@ export const DepartmentTable:React.FC = () => {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef<InputRef>(null);
-    const { data, isLoading, deleteData } = useDepartmentTable();
+    const { data, isLoading, deleteData, setStatusToAvailable } = useDepartmentTable();
     const { getToken } = Authentication();
     const token = getToken();
 
@@ -150,6 +151,7 @@ export const DepartmentTable:React.FC = () => {
     {
         title: 'Email',
         dataIndex: 'email',
+        width: 200,
         key: 'email',
     },
     {
@@ -179,16 +181,27 @@ export const DepartmentTable:React.FC = () => {
         title: 'Date Created',
         dataIndex: 'created_at',
         key: 'created_at',
+        render: (_, record) => {
+          return moment(record.created_at, 'X').format('MMMM DD, YYYY');
+        }
     },
     {
         title: 'Action',
         key: 'action',
-        width: 150,
+        width: 200,
         fixed: 'right',
         align: 'center',
         render: (record) => (
             <Space size={5}>
-                <Button type="primary" size='small'>Edit</Button>
+                <Popconfirm
+                    title="Set Status to available"
+                    description="Are you sure to set this task to available?"
+                    onConfirm={() => setStatusToAvailable(record.id, token)}
+                    okText="Yes"
+                    cancelText="No"
+                >
+                  <Button type="primary" size='small'>Set Status</Button>
+                </Popconfirm>
                 <Popconfirm
                     title="Delete the task"
                     description="Are you sure to delete this task?"
