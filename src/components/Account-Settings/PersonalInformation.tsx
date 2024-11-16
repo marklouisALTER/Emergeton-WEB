@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { LiaUserEditSolid } from "react-icons/lia";
 import { toast, Toaster } from 'sonner'
+import { useAccountStore } from '@/store/Accounts/useAccountStore'
 
 
 const FormSchema = z.object({
@@ -24,22 +25,18 @@ const FormSchema = z.object({
     email: z.string()
         .email({ message: "Enter a valid email address." })
         .max(100, { message: "Email cannot exceed 100 characters." }),
-
-    username: z.string()
-        .min(5, { message: "Username must be at least 5 characters long." })
-        .max(50, { message: "Username cannot exceed 50 characters." }),
 });
 
 const PersonalInformation:React.FC = () => {
 
     const [isEditable, setIsEditable] = useState(true);
+    const { user } = useAccountStore();
     const formProps = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
-            firstname: 'Juan',
-            lastname: 'Dela Cruz',
-            email: 'jdoe@gmail.com',
-            username: 'jdoe'
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email
         }
     })
 
@@ -116,22 +113,6 @@ const PersonalInformation:React.FC = () => {
                                 </FormControl>
                                 <FormDescription className='text-gray-400 font-sans text-sm mt-2'>
                                     Enter the email of employee.
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={formProps.control}
-                        name='username'
-                        render={({ field}) => (
-                            <FormItem>
-                                <FormLabel className='text-black font-medium font-sans'>Username</FormLabel>
-                                <FormControl>
-                                    <Input className='border border-gray-300 shadow-sm bg-white' placeholder='Input the username' {...field} disabled={isEditable} />
-                                </FormControl>
-                                <FormDescription className='text-gray-400 font-sans text-sm mt-2'>
-                                    Enter the username of employee.
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>

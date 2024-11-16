@@ -8,6 +8,7 @@ import PersonalInformation from '@/components/Account-Settings/PersonalInformati
 import { ChangePassword } from '@/components/Account-Settings/ChangePassword';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Authentication } from '@/Authentication/Authenticate';
+import { useAccountStore } from '@/store/Accounts/useAccountStore';
 
 const Profile:React.FC = () => {
 
@@ -18,12 +19,14 @@ const Profile:React.FC = () => {
     const userID = getID()
     const navigate = useNavigate();
     const location = useLocation();
-  
+    const { fetchAccount } = useAccountStore();
     useEffect(() => {
       if(!isAuthenticated()){
           navigate('/', { state: { message: "You must login first", from: location.pathname } })
       }      
-      
+
+      fetchAccount(token)
+
     },[user, token, userID])
   const items: TabsProps['items'] = [{
     key: '1',
