@@ -56,9 +56,10 @@ const FormSchema = z.object({
 
 export const DepartmentModal:React.FC = () => {
 
-    const { addData, isLoading } = useDepartmentTable();
+    const { addData, isLoading, setModalState, modalState } = useDepartmentTable();
     const { getToken } = Authentication();
     const token = getToken();
+    
     const DepartmentForm = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -79,8 +80,10 @@ export const DepartmentModal:React.FC = () => {
     
 
     return (
-        <Dialog>
-        <DialogTrigger className='font-sans bg-primary px-5 py-2 rounded-md text-white hover:bg-primary/80
+        <Dialog open={modalState} onOpenChange={setModalState}>
+        <DialogTrigger 
+        onClick={setModalState} 
+        className='font-sans bg-primary px-5 py-2 rounded-md text-white hover:bg-primary/80
         transition-all delay-75 ease-in-out flex items-center gap-2'>
           <AiFillFileAdd className='text-xl' />
           Add Department

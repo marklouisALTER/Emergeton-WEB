@@ -20,6 +20,8 @@ type departmentTableProps = {
         message: string;
     };
     isLoading: boolean;
+    modalState: boolean;
+    setModalState: () => void;
     fetchData: (token: string) => void;
     deleteData: (id: number, token: string) => void;
     setStatusToAvailable: (id: number, token: string) => void;
@@ -41,6 +43,8 @@ export const useDepartmentTable = create<departmentTableProps>((set) => ({
         title: '',
         message: ''
     },
+    modalState: false,
+    setModalState: () => set(() => ({ modalState: true })),
     isLoading: false,
     fetchData: async (token) => {
         set({ isLoading: true });
@@ -119,7 +123,7 @@ export const useDepartmentTable = create<departmentTableProps>((set) => ({
             set((state) => ({
                 data: [...state.data || [], newData]
             }))
-            set({ response: { title: 'Success', message: 'Record added successfully' } });
+            set({ response: { title: 'Success', message: 'Record added successfully' }, modalState: false });
         }catch(error){
             if(error instanceof AxiosError){
                 set({ 
