@@ -3,21 +3,20 @@ import { Input } from '@/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from 'antd'
 import FormItem from 'antd/es/form/FormItem'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { LiaUserEditSolid } from "react-icons/lia";
-import { toast, Toaster } from 'sonner'
 import { useAccountStore } from '@/store/Accounts/useAccountStore'
 
 
 const FormSchema = z.object({
-    firstname: z.string()
+    first_name: z.string()
         .min(2, { message: "First name must be at least 2 characters long." })
         .max(50, { message: "First name cannot exceed 50 characters." })
         .regex(/^[a-zA-Z\s]+$/, { message: "First name can only contain letters and spaces." }),
 
-    lastname: z.string()
+    last_name: z.string()
         .min(2, { message: "Last name must be at least 2 characters long." })
         .max(50, { message: "Last name cannot exceed 50 characters." })
         .regex(/^[a-zA-Z\s]+$/, { message: "Last name can only contain letters and spaces." }),
@@ -30,25 +29,41 @@ const FormSchema = z.object({
 const PersonalInformation:React.FC = () => {
 
     const [isEditable, setIsEditable] = useState(true);
-    const { user } = useAccountStore();
+    const { user, updateAccount, isLoading, status } = useAccountStore();
+
     const formProps = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.email
+            first_name: '',
+            last_name: '',
+            email: ''
         }
     })
 
-    const onSubmit = (data: z.infer<typeof FormSchema>) => {
-        console.log(data)
-        // setIsEditable((prevState) => !prevState)
-        toast.success('Changes saved successfully')
+    useEffect(() => {
+  
+        if (user) {
+            formProps.reset({
+                first_name: user.first_name || '',
+                last_name: user.last_name || '',
+                email: user.email || ''
+            });
+        }
+
+        
+    if(status === 'success'){
+        setIsEditable(true)
     }
 
+    }, [user, formProps]);
+
+    const onSubmit = (data: z.infer<typeof FormSchema>) => {
+        // console.log(data)
+        updateAccount(data)
+    }
+    
     return (
         <section className='w-full'>
-        <Toaster position='bottom-right' />
         <div className='grid grid-cols-2 '>
             <div className='col-span-1'>             
                 <h1 className='font-sans text-lg font-semibold text-black/90'>General Information</h1>
@@ -71,7 +86,7 @@ const PersonalInformation:React.FC = () => {
                 <div className='grid grid-cols-2 gap-x-5'>
                     <FormField
                         control={formProps.control}
-                        name='firstname'
+                        name='first_name'
                         render={({ field}) => (
                             <FormItem>
                                 <FormLabel className='text-black font-medium font-sans'>First Name</FormLabel>
@@ -87,7 +102,7 @@ const PersonalInformation:React.FC = () => {
                     />
                     <FormField
                         control={formProps.control}
-                        name='lastname'
+                        name='last_name'
                         render={({ field}) => (
                             <FormItem>
                                 <FormLabel className='text-black font-medium font-sans'>Last Name</FormLabel>
@@ -125,7 +140,9 @@ const PersonalInformation:React.FC = () => {
                             transition-all delay-75 ease-in-out flex items-center gap-2' onClick={() => setIsEditable((prevState) => !prevState)}>
                             <span>Cancel</span>
                         </Button>
-                        <Button className='font-sans bg-primary px-5 py-2 rounded-md text-white hover:bg-primary/80
+                        <Button 
+                            loading={isLoading}
+                            className='font-sans bg-primary px-5 py-2 rounded-md text-white hover:bg-primary/80
                             transition-all delay-75 ease-in-out flex items-center gap-2' htmlType="submit">
                             <LiaUserEditSolid className='text-xl' />
                             <span>Save Changes</span>
