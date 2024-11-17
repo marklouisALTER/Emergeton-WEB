@@ -8,6 +8,7 @@ import { useAlertStore } from '@/store/Alerts/useStoreAlerts';
 import { useDispatchModalStore } from '@/store/Modal/useDispatchModal';
 import { FaMapPin } from "react-icons/fa6";
 import moment from 'moment';
+import { useAlertModal } from '@/store/Alerts/useAlertModal';
 type AlertHistoryDataType = {
     message: string;
     alert_type: string;
@@ -31,7 +32,7 @@ export const AlertHistoryTable:React.FC = () => {
     const searchInput = useRef<InputRef>(null);
     const { alertData, isLoading } = useAlertStore();
     const { openModal } = useDispatchModalStore();
-
+    const { openAlertModal } = useAlertModal();
   const handleSearch = (
     selectedKeys: string[],
     confirm: FilterDropdownProps['confirm'],
@@ -190,7 +191,7 @@ export const AlertHistoryTable:React.FC = () => {
     {
         title: 'Action',
         key: 'action',
-        width: 150,
+        width: 200,
         fixed: 'right',
         align: 'center',
         render: (record) => (
@@ -202,6 +203,13 @@ export const AlertHistoryTable:React.FC = () => {
             //         okText="Yes"
             //         cancelText="No"
             //     >
+            <Space size={5}>
+              <Button 
+                type="default"
+                onClick={() => openAlertModal(record.id)}
+                >
+                  Set Status
+            </Button>
             <Button 
                 type="primary" 
                 onClick={() => openModal(record.id, record.alert_type)}
@@ -210,6 +218,7 @@ export const AlertHistoryTable:React.FC = () => {
                 disabled={record.alert_status === 'pending' ? false : true}>
                 {record.alert_status === 'pending' ? 'Send Dispatch' : record.alert_status === 'ongoing' ? 'Ongoing' : record.alert_status === 'dismissed' ? 'Dismissed' : 'Done'}
             </Button>
+            </Space>
             //     </Popconfirm>
             // </Space>
         )

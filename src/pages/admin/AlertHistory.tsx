@@ -1,4 +1,5 @@
 import { Authentication } from '@/Authentication/Authenticate';
+import { AlertModal } from '@/components/Modal/AlertModal';
 import { ConfirmationModal } from '@/components/Modal/ConfirmationModal';
 import { AlertHistoryTable } from '@/components/Table/AlertHistoryTable';
 import { useAlertStore } from '@/store/Alerts/useStoreAlerts';
@@ -12,7 +13,7 @@ export const AlertHistory:React.FC = () => {
     const navigate = useNavigate();
     const token = getToken();
     const location = useLocation();
-    const { fetchAlert, error, error_message } = useAlertStore();
+    const { fetchAlert, status, message } = useAlertStore();
     useEffect(() => {
       if (!isAuthenticated()) {
           navigate('/', { state: { message: "You must login first", from: location.pathname } });
@@ -23,11 +24,14 @@ export const AlertHistory:React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (error) {
-        toast.error(error_message);
+    if (status === 'success') {
+      toast.success(message);
     }
-  }
-  , [error, error_message]);
+
+    if (status === 'error') {
+      toast.error(message);
+    }
+  }, [status, message]);
   
 
   return (
@@ -38,6 +42,8 @@ export const AlertHistory:React.FC = () => {
     </div>
     <AlertHistoryTable />
     <ConfirmationModal />
+    <AlertModal />
+
   </section>
   )
 }

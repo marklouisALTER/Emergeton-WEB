@@ -18,16 +18,19 @@ type alertDataType = {
 type alertStoreType = {
     alertData: alertDataType[];
     isLoading: boolean;
-    error: boolean;
-    error_message: string;
+    status: 'idle' | 'success' | 'error';
+    message: string;
+    token: string;
     fetchAlert: (token: string) => void;
+    changeAlertStatus: (alertID: string, status: string) => void;
 }
 
-export const useAlertStore = create<alertStoreType>((set) => ({
+export const useAlertStore = create<alertStoreType>((set, get) => ({
     alertData: [],
     isLoading: false,
-    error: false,
-    error_message: '',
+    status: 'idle',
+    token: '',
+    message: '',
     fetchAlert: async (token) => {
         
         set({ isLoading: true })
@@ -37,12 +40,41 @@ export const useAlertStore = create<alertStoreType>((set) => ({
                     Authorization: `Bearer ${token}`
                 }
             })
-            set({ alertData: response.data.data, isLoading: false })
+            set({ alertData: response.data.data, isLoading: false, token })
         } catch (error) {
             if(error instanceof AxiosError){
-                set({ error: true, error_message: error.response?.data.message || 'An error occured', isLoading: false })
+                set({ status: 'error', message: error.response?.data.message || 'An error occured', isLoading: false })
             }
         }
         
+    },
+    changeAlertStatus: async (alertID, status) => {
+        set({ isLoading: true })
+        const token = get().token;
+        try {
+            await axios.patch(`https://emergeton-api.onrender.com/api/v1/alerts/update/${alertID}`, {
+                alert_status: status
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            set({ status: 'success', message: 'Alert status updated successfully', isLoading: false })
+            set((state) => ({
+                alertData: state.alertData.map((alert) => {
+                    if(alert.id === alertID){
+                        return {
+                            ...alert,
+                            alert_status: status
+                        }
+                    }
+                    return alert
+                })
+            }))
+        } catch (error) {
+            if(error instanceof AxiosError){
+                set({ status: 'error', message: error.response?.data.message || 'An error occured', isLoading: false })
+            }
+        }
     }
 }))
