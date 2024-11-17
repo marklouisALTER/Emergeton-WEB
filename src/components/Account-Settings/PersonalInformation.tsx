@@ -91,7 +91,7 @@ const PersonalInformation:React.FC = () => {
                             <FormItem>
                                 <FormLabel className='text-black font-medium font-sans'>First Name</FormLabel>
                                 <FormControl>
-                                    <Input className='border border-gray-300 shadow-sm bg-white' placeholder='Input the first name' {...field} disabled={isEditable} />
+                                    <Input id='first_name' className='border border-gray-300 shadow-sm bg-white' placeholder='Input the first name' {...field} disabled={isEditable} />
                                 </FormControl>
                                 <FormDescription className='text-gray-400 font-sans text-sm mt-2'>
                                     Enter the first name of employee.
@@ -107,7 +107,7 @@ const PersonalInformation:React.FC = () => {
                             <FormItem>
                                 <FormLabel className='text-black font-medium font-sans'>Last Name</FormLabel>
                                 <FormControl>
-                                    <Input className='border border-gray-300 shadow-sm bg-white' placeholder='Input the last name' {...field} disabled={isEditable} />
+                                    <Input id='last_name' className='border border-gray-300 shadow-sm bg-white' placeholder='Input the last name' {...field} disabled={isEditable} />
                                 </FormControl>
                                 <FormDescription className='text-gray-400 font-sans text-sm mt-2'>
                                     Enter the last name of employee.
@@ -124,7 +124,7 @@ const PersonalInformation:React.FC = () => {
                             <FormItem>
                                 <FormLabel className='text-black font-medium font-sans'>Email</FormLabel>
                                 <FormControl>
-                                    <Input className='border border-gray-300 shadow-sm bg-white' placeholder='Input the email' {...field} disabled={isEditable} />
+                                    <Input id='email' className='border border-gray-300 shadow-sm bg-white' placeholder='Input the email' {...field} disabled={isEditable} />
                                 </FormControl>
                                 <FormDescription className='text-gray-400 font-sans text-sm mt-2'>
                                     Enter the email of employee.

@@ -15,7 +15,7 @@ type useStoreType = {
     message: string;
     userToken: string;
     fetchAccount: (token: string) => void;
-    changePassword: (token: string, current_password: string, new_password: string, confirm_password: string) => void;
+    changePassword: (current_password: string, new_password: string, confirm_password: string) => void;
     updateAccount: (data: { first_name: string, last_name: string, email: string }) => void;
 }
 
@@ -46,10 +46,13 @@ export const useAccountStore = create<useStoreType>((set, get)=> ({
             }
         }
     },
-    changePassword: async (token: string, current_password: string, new_password: string, confirm_password: string) => {
+    changePassword: async (current_password: string, new_password: string, confirm_password: string) => {
         set({ isLoading: true, status: 'idle', message: '' })
+
+        const token = get().userToken;
+
         try {
-            const response = await axios.post('https://emergeton-api.onrender.com/api/v1/account/update-password', {
+            const response = await axios.patch('https://emergeton-api.onrender.com/api/v1/account/update-password', {
                 current_password,
                 new_password,
                 confirm_password
