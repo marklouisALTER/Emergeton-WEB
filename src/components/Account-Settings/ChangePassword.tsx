@@ -1,12 +1,12 @@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { useAccountStore } from '@/store/Accounts/useAccountStore'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
+import { Button } from 'antd'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-
-const passwordStrengthRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
 const ChangePasswordFormSchema = z.object({
   currentPassword: z
@@ -17,8 +17,7 @@ const ChangePasswordFormSchema = z.object({
   newPassword: z
     .string()
     .trim()
-    .min(8, 'Password must be at least 8 characters long')
-    .regex(passwordStrengthRegex, 'Password must include at least one uppercase letter, one number, and one special character'),
+    .min(8, 'Password must be at least 8 characters long'),
 
   confirmPassword: z
     .string()
@@ -30,16 +29,40 @@ const ChangePasswordFormSchema = z.object({
 });
 export const ChangePassword:React.FC = () => {
 
+  const { changePassword, isLoading, status } = useAccountStore();
+
     const formProps = useForm<z.infer<typeof ChangePasswordFormSchema>>({
-        resolver: zodResolver(ChangePasswordFormSchema),
-       })
+      resolver: zodResolver(ChangePasswordFormSchema),
+    })
+
+    const onSubmit = (data: z.infer<typeof ChangePasswordFormSchema>) => {
+      if (data.currentPassword === data.newPassword) {
+        useAccountStore.setState({
+          status: 'error',
+          message: 'Changing password to the same password is not allowed',
+        });
+        return;
+      }
+    
+      changePassword(data.currentPassword, data.newPassword, data.confirmPassword);
+    };
+
+    useEffect(() => {
+      if (status === 'success') {
+        formProps.reset({
+          currentPassword: '',
+          newPassword: '',
+          confirmPassword: '',
+        });
+      }
+    }, [status, formProps]);
 
   return (
     <section className='w-full'>
     <h1 className='font-sans text-lg font-semibold text-black/90'>Change Password</h1>
     <div className='mt-5 w-3/4'>
         <Form {...formProps}>
-          <form onSubmit={formProps.handleSubmit(data => console.log(data))} className='space-y-3 mt-5'>
+          <form onSubmit={formProps.handleSubmit(onSubmit)} className='space-y-5'>
             <FormField
               control={formProps.control}
               name='currentPassword'
@@ -80,7 +103,13 @@ export const ChangePassword:React.FC = () => {
               )}
             />
             
-            <button type='submit' className='bg-primary text-white font-sans font-medium py-2 px-4 rounded-md'>Change Password</button>
+            <Button 
+              disabled={isLoading}
+              loading={isLoading}
+              htmlType='submit'
+              className='bg-primary text-white font-sans font-medium py-2 px-4 rounded-md'>
+                Change Password
+            </Button>
           </form>
         </Form>
     </div>
