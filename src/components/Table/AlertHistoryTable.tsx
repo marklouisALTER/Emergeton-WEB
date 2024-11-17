@@ -127,6 +127,7 @@ export const AlertHistoryTable:React.FC = () => {
         dataIndex: 'alert_status',
         key: 'alert_status',
         fixed: 'left',
+        align: 'center',
         width: 150,
         sorter: (a, b) => a.alert_status.length - b.alert_status.length,
         render: (_, record) => {
@@ -143,6 +144,7 @@ export const AlertHistoryTable:React.FC = () => {
         title: 'Full Name',
         dataIndex: 'full_name',
         key: 'full_name',
+        width:140,
         render: (_, record) => {
             return `${record.first_name} ${record.last_name}`;
         }
@@ -191,8 +193,8 @@ export const AlertHistoryTable:React.FC = () => {
     {
         title: 'Action',
         key: 'action',
-        width: 200,
-        fixed: 'right',
+        width: 250,
+        // fixed: 'right',
         align: 'center',
         render: (record) => (
             // <Space size={5}>

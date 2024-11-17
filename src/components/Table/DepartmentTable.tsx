@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import Highlighter from 'react-highlight-words';
-import { Button, ConfigProvider, Input, Space, Table, Popconfirm, message } from 'antd';
+import { Button, ConfigProvider, Input, Space, Table, Popconfirm } from 'antd';
 import type { InputRef, TableColumnsType, TableColumnType } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import type { FilterDropdownProps } from 'antd/es/table/interface';
@@ -32,7 +32,7 @@ export const DepartmentTable:React.FC = () => {
 
     const removeRecord = (id: number) => {
         deleteData(id, token);
-        return message.success('Record deleted successfully');
+        // return message.success('Record deleted successfully');
     }
 
   const handleSearch = (
