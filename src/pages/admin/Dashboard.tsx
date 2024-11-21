@@ -11,6 +11,8 @@ import { useAlertStore } from '@/store/Alerts/useStoreAlerts';
 import AlertCard from '@/components/Cards/AlertCard';
 import { ConfirmationModal } from '@/components/Modal/ConfirmationModal';
 import { useDepartmentTable } from '@/store/Department/useDepartmentTable';
+import { Button } from 'antd';
+import { useDispatchModalStore } from '@/store/Modal/useDispatchModal';
 
 const policeIcon = L.divIcon({
   className: 'custom-marker',
@@ -59,6 +61,12 @@ const pendingAlerts = alertData.filter((item) => item.alert_status === 'pending'
 const countPoliceDept = data.filter((item) => item.tags === 'police').length;
 const countFireDept = data.filter((item) => item.tags === 'fire').length;
 const countHealthDept = data.filter((item) => item.tags === 'health').length;
+
+const { openModal } = useDispatchModalStore();
+
+const confirmationDispatch = (alertId: string, alert_type: string) => {
+  openModal(alertId, alert_type);
+}
   return (
 
     <section className='p-5 md:pl-5'>
@@ -89,6 +97,13 @@ const countHealthDept = data.filter((item) => item.tags === 'health').length;
                             {data.alert_type === 'fire' ? 'Fire' : data.alert_type === 'police' ? 'Police' : 'Health'}
                           </span>
                         </p>
+                        {/* button deploy */}
+                        {
+                          data.alert_status === 'pending' ? 
+                              <Button className='bg-green-600 text-white px-3 py-1 rounded-md mt-2' onClick={() => confirmationDispatch(data.id, data.alert_type)}>Deploy</Button>
+                          :
+                          <Button className='bg-gray-500 text-white px-3 py-1 rounded-md mt-2' disabled>Ongoing</Button>
+                        }
                       </div>
                     </Popup>
                   </Marker>
