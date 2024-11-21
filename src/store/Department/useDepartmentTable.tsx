@@ -21,7 +21,7 @@ type departmentTableProps = {
     };
     isLoading: boolean;
     modalState: boolean;
-    setModalState: () => void;
+    setModalState: (state: boolean) => void;
     fetchData: (token: string) => void;
     deleteData: (id: number, token: string) => void;
     setStatusToAvailable: (id: number, token: string) => void;
@@ -44,7 +44,7 @@ export const useDepartmentTable = create<departmentTableProps>((set) => ({
         message: ''
     },
     modalState: false,
-    setModalState: () => set(() => ({ modalState: true })),
+    setModalState: (state) => set({ modalState: state }),
     isLoading: false,
     fetchData: async (token) => {
         set({ isLoading: true });
