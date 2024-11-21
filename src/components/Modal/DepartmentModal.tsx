@@ -80,9 +80,10 @@ export const DepartmentModal:React.FC = () => {
     
 
     return (
-        <Dialog open={modalState} onOpenChange={setModalState}>
+      <Dialog open={modalState} onOpenChange={(isOpen) => setModalState(isOpen)}>
+
         <DialogTrigger 
-        onClick={setModalState} 
+        onClick={() => setModalState(true)}     
         className='font-sans bg-primary px-5 py-2 rounded-md text-white hover:bg-primary/80
         transition-all delay-75 ease-in-out flex items-center gap-2'>
           <AiFillFileAdd className='text-xl' />
