@@ -58,9 +58,9 @@ useEffect(() => {
 },[user, token, userID])
 
 const pendingAlerts = alertData.filter((item) => item.alert_status === 'pending');
-const countPoliceDept = data.filter((item) => item.tags === 'police').length;
-const countFireDept = data.filter((item) => item.tags === 'fire').length;
-const countHealthDept = data.filter((item) => item.tags === 'health').length;
+const countPoliceDept = data.filter((item) => item.tags === 'police' && item.status === 'available').length;
+const countFireDept = data.filter((item) => item.tags === 'fire' && item.status === 'available').length;
+const countHealthDept = data.filter((item) => item.tags === 'health' && item.status === 'available').length;
 
 const { openModal } = useDispatchModalStore();
 
