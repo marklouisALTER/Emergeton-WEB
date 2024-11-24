@@ -44,7 +44,6 @@ export const Login:React.FC = () => {
                       <input type='checkbox' className='mr-2' />
                       <p className='font-secondary text-sm text-gray-500'>Remember me</p>
                     </div>
-                    <p className='font-secondary text-sm text-primary'>Forgot Password?</p>
                   </div>
                   <button className='bg-primary text-white py-2 rounded-full mt-5'>Login</button>
                   <div className='flex items-center justify-center'>
