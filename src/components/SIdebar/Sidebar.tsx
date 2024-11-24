@@ -13,8 +13,8 @@ const Sidebar:React.FC = () => {
       <aside className="fixed z-30 hidden min-h-screen bg-primary shadow-lg lg:block">
         <nav className="flex h-dvh flex-col bg-custom-black shadow-sm">
           <div className="mb-8 flex items-center gap-2 p-4 pb-2 text-2xl">
-            <div className='w-10 h-10 rounded-full bg-white'>
-              <PiUserCircleFill className='text-primary text-xl'/>
+            <div className='w-10 h-10 rounded-full bg-white flex items-center justify-center'>
+              <PiUserCircleFill className='text-primary text-5xl'/>
             </div>
             <span className="text-2xl font-bold text-blue-100/30">Emergton</span>
           </div>

@@ -107,7 +107,7 @@ const AdminLogin:React.FC = () => {
                   <input type='checkbox' id='rememberMe' name='rememberMe' className='mr-2' />
                   <label htmlFor='rememberMe' className='font-secondary text-sm text-gray-500 cursor-pointer'>Remember me</label>
                 </div>
-                <p className='font-secondary text-sm text-primary'>Forgot Password?</p>
+                {/* <p className='font-secondary text-sm text-primary'>Forgot Password?</p> */}
               </div>
               <Button 
                 className='bg-primary text-white py-2 rounded-full mt-5'
