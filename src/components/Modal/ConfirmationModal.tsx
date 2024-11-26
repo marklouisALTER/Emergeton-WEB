@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useAlertStore } from '@/store/Alerts/useStoreAlerts';
 
 export const ConfirmationModal: React.FC = () => {
-    const { isOpen, closeModal, alertId, alert_type } = useDispatchModalStore();
+    const { isOpen, closeModal, alertId } = useDispatchModalStore();
     const { data } = useDepartmentTable();
     const [selectedId, setSelectedId] = useState<string | null>(null);
     const token = sessionStorage.getItem('token')?.replace(/"/g, '');
@@ -64,7 +64,7 @@ export const ConfirmationModal: React.FC = () => {
         }
     };
 
-    const filterAlert = data.filter((item) => item.tags === alert_type);
+    // const filterAlert = data.filter((item) => item.tags === alert_type);
 
     return (
         <Modal
@@ -84,7 +84,7 @@ export const ConfirmationModal: React.FC = () => {
                 className='w-full mt-3'
                 placeholder="Select Department to deploy"
             >
-                {filterAlert.map((item) => (
+                {data.map((item) => (
                     <Select.Option 
                         key={item.id} 
                         value={`${item.id}`}

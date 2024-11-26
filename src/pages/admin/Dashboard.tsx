@@ -70,13 +70,50 @@ const confirmationDispatch = (alertId: string, alert_type: string) => {
   return (
 
     <section className='p-5 md:pl-5'>
+      <div className='mb-5'>
+        <h3 className='font-secondary text-blue-700 text-2xl font-bold'>Malabon City Command Post</h3>
+        <div className='mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-5'>
+          <div className='flex items-center gap-2'>
+            <p className='font-primary text-primary text-xs font-bold'>Bureau of Fire Protection - Malabon: </p>
+            <p className='font-secondary text-black/80 text-xs'>8-292-7339</p>
+          </div>
+          <div className='flex items-center gap-2'>
+            <p className='font-primary text-primary text-xs font-bold'>Health and Sanitation Division</p>
+            <p className='font-secondary text-black/80 text-xs'>8-281-4999 LOCAL 1821 / 0968-385-9817</p>
+          </div>
+          <div className='flex items-center gap-2'>
+            <p className='font-primary text-primary text-xs font-bold'>Malabon City Health Office</p>
+            <p className='font-secondary text-black/80 text-xs'>8-281-4999 LOCAL 1801</p>
+          </div>
+          <div className='flex items-center gap-2'>
+            <p className='font-primary text-primary text-xs font-bold'>Malabon Command Center</p>
+            <p className='font-secondary text-black/80 text-xs'>0942-372-9891 | 0919-062-5588
+            8-921-6009 | 8-921-6029</p>
+          </div>
+          <div className='flex items-center gap-2'>
+            <p className='font-primary text-primary text-xs font-bold'>Ospital ng Malabon</p>
+            <p className='font-secondary text-black/80 text-xs'>8-518-8602 LOCAL 100 | 123</p>
+          </div>
+          <div className='flex items-center gap-2'>
+            <p className='font-primary text-primary text-xs font-bold'>Office of the City Mayor - TXTMJS</p>
+            <p className='font-secondary text-black/80 text-xs'>0917-889-8657</p>
+          </div>
+          <div className='flex items-center gap-2'>
+            <p className='font-primary text-primary text-xs font-bold'>Philippine National Police Malabon</p>
+            <p className='font-secondary text-black/80 text-xs'>8-287-3652 | 0921-705-0770</p>
+          </div>
+        </div>
+      </div>
       <h1 className='font-primary text-black/80 text-xl font-semibold'>Admin Dashboard</h1>
       <div className='grid grid-cols-1 sm:grid-cols-2 h-screen gap-5 py-5'>  
         <div className='py-5'>
+
+
           <div className='mb-5'>
             <h3 className='font-secondary text-black/80 font-medium'>Emergency Map</h3>
             <p className='font-secondary text-gray-400 text-xs'>It will show here all the emergency in the vicinity</p>  
           </div>
+
           <MapContainer center={[14.653740, 120.960177]} zoom={12} className='h-[50vh] md:h-[75vh]' style={{ width: '100%' }}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
