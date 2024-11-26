@@ -151,7 +151,7 @@ const confirmationDispatch = (alertId: string, alert_type: string) => {
             </div>
           </div>
           <h2 className='font-secondary text-white bg-primary font-medium mt-5 p-4'>Recent Emergency</h2>
-            <div className='flex flex-col gap-5 h-full overflow-y-auto overflow-x-hidden'>
+            <div className='flex flex-col gap-5 h-[50vh] md:h-[75vh] overflow-y-auto overflow-x-hidden'>
             {pendingAlerts?.map((data) => (
                 <AlertCard key={data.id} {...data} />
               ))|| <div>No data</div>}
