@@ -131,7 +131,8 @@ const confirmationDispatch = (alertId: string, alert_type: string) => {
                     <Popup>
                       <div>
                         <h3 className='font-secondary text-black/80 font-medium'>Emergency</h3>
-                        <p className='font-secondary text-gray-400 text-xs'>Name: <span className='text-black/70'>{data.message}</span></p>
+                        <p className='font-secondary text-gray-400 text-xs'>Name: <span className='text-black/70'>{`${data.first_name} ${data.last_name}`}</span></p>
+                        <p className='font-secondary text-gray-400 text-xs'>Message: <span className='text-black/70'>{data.message}</span></p>
                         <p className='font-secondary text-gray-400 text-xs'>Location: <span className='text-black/70'>{data.address}</span></p>
                         <p className='font-secondary text-gray-400 text-xs'>Alert Type: 
                           <span className={`ml-1 text-black/70 ${data.alert_type === 'fire' ? 'bg-red-500' : data.alert_type === 'police' ? 'bg-blue-500' : 'bg-green-500'} text-white px-2 py-1 rounded-md`}>
