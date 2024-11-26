@@ -70,7 +70,7 @@ const AdminLogin:React.FC = () => {
           <div className='p-5 rounded-full border-4 border-black/80'>
             <FaPhoneVolume className='text-black/80 text-5xl' />
           </div>
-          <h1 className='text-3xl font-extrabold mt-5 text-black/80 font-primary leading-4 tracking-widest'>EMERGETON</h1>
+          <h1 className='text-3xl font-extrabold mt-5 text-black/80 font-primary leading-4 tracking-widest'>EMERGTON</h1>
           <p className='text-lg text-black/60 mt-2 font-medium font-secondary'>EMERGENCY APP</p>
         </div>
         {location.state?.message &&
