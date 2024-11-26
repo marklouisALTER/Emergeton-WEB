@@ -102,6 +102,10 @@ const confirmationDispatch = (alertId: string, alert_type: string) => {
             <p className='font-primary text-primary text-xs font-bold'>Philippine National Police Malabon</p>
             <p className='font-secondary text-black/80 text-xs'>8-287-3652 | 0921-705-0770</p>
           </div>
+          <div className='flex items-center gap-2'>
+            <p className='font-primary text-primary text-xs font-bold'>Red Cross Malabon Chapter</p>
+            <p className='font-secondary text-black/80 text-xs'>8-366-6470</p>
+          </div>
         </div>
       </div>
       <h1 className='font-primary text-black/80 text-xl font-semibold'>Admin Dashboard</h1>
